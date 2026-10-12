@@ -1,145 +1,100 @@
 <!doctype html>
 <html lang="id">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#f7f5f0">
-  <meta name="description" content="Buat QR code gratis dari tautan atau teks. Simpan gambar QR dalam satu klik, langsung dari browser.">
-  <title>RuangQR — QR Code untuk Tautan &amp; Teks</title>
-  <style>
-    :root{--paper:#f5f4ef;--white:#fffefa;--ink:#172b28;--muted:#71807b;--line:#e7e9e2;--green:#174e43;--green2:#236c5c;--lime:#d8f278;--soft:#edf2e9;--danger:#a53e36;--shadow:0 24px 70px rgba(28,54,46,.09)}
-    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;min-height:100vh;background:var(--paper);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
-    button,textarea{font:inherit}.shell{width:min(1120px,calc(100% - 48px));margin:auto}.topbar{height:86px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(23,43,40,.09)}
-    .brand{display:flex;align-items:center;gap:11px;text-decoration:none;color:var(--ink);font-weight:800;letter-spacing:-.04em;font-size:19px}.brandmark{width:36px;height:36px;border-radius:12px;background:var(--green);display:grid;place-items:center;box-shadow:0 6px 14px rgba(23,78,67,.16)}.brandmark svg{width:21px;height:21px}.topnote{font-size:12px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:var(--muted);display:flex;align-items:center;gap:9px}.live-dot{width:7px;height:7px;border-radius:100%;background:#65a887;box-shadow:0 0 0 4px #65a88720}
-    main{padding:64px 0 70px}.layout{display:grid;grid-template-columns:minmax(0,.92fr) minmax(420px,1.08fr);gap:76px;align-items:center}.intro{padding:8px 0}.eyebrow{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;background:#e9eddf;border-radius:999px;color:var(--green);font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase}.eyebrow svg{width:14px;height:14px}h1{font-size:clamp(44px,6vw,70px);line-height:.99;letter-spacing:-.075em;margin:23px 0 20px;font-weight:780;max-width:530px}.accent{color:var(--green2)}.lead{font-size:16px;line-height:1.75;color:#697771;max-width:440px;margin:0}.trust{display:flex;gap:19px;flex-wrap:wrap;margin-top:31px;color:#61736b;font-size:12px;font-weight:650}.trust span{display:flex;align-items:center;gap:7px}.check{width:17px;height:17px;border:1px solid #c8d2c5;border-radius:100%;display:grid;place-items:center;color:var(--green2);font-size:11px}
-    .maker{background:var(--white);border:1px solid rgba(23,43,40,.08);border-radius:24px;padding:30px;box-shadow:var(--shadow);position:relative;overflow:hidden}.maker:before{content:"";position:absolute;right:-42px;top:-60px;width:170px;height:170px;border:1px solid #dfe7d6;border-radius:50%;pointer-events:none}.cardhead{position:relative;display:flex;justify-content:space-between;align-items:flex-start;gap:14px;margin-bottom:25px}.cardhead h2{font-size:20px;letter-spacing:-.04em;margin:0 0 6px}.cardhead p{font-size:13px;color:var(--muted);margin:0;line-height:1.55}.qrmini{width:42px;height:42px;border-radius:13px;background:var(--soft);display:grid;place-items:center;color:var(--green);flex:none}.qrmini svg{width:22px;height:22px}
-    label{font-size:12px;font-weight:750;display:block;margin:0 0 9px}.inputwrap{position:relative}.inputwrap textarea{display:block;width:100%;min-height:104px;resize:vertical;border:1px solid #dfe4dc;border-radius:13px;background:#fff;padding:15px 15px 33px;color:var(--ink);outline:none;line-height:1.55;font-size:14px;transition:border .18s,box-shadow .18s}.inputwrap textarea:focus{border-color:#72a58e;box-shadow:0 0 0 4px rgba(71,137,107,.12)}textarea::placeholder{color:#a2aaa4}.charcount{position:absolute;bottom:11px;right:13px;color:#98a29b;font-size:10px;pointer-events:none}
-    .actions{display:flex;gap:10px;margin-top:13px}.btn{min-height:49px;border-radius:12px;border:0;display:inline-flex;align-items:center;justify-content:center;gap:9px;font-weight:750;cursor:pointer;transition:transform .16s,background .16s,box-shadow .16s}.btn:active{transform:translateY(1px)}.btn-primary{flex:1;background:var(--green);color:white;padding:0 18px;box-shadow:0 8px 16px rgba(23,78,67,.15)}.btn-primary:hover{background:#0f4037;box-shadow:0 10px 20px rgba(23,78,67,.2)}.btn-primary:disabled{opacity:.65;cursor:wait}.btn-primary svg,.btn-quiet svg{width:17px;height:17px}.btn-quiet{background:#f1f2ec;color:#42524c;padding:0 15px}.btn-quiet:hover{background:#e7eae1}
-    .result{display:none;margin-top:23px;padding-top:22px;border-top:1px solid var(--line);animation:appear .28s ease}.result.visible{display:block}.result-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:13px}.result-title{font-size:13px;font-weight:750}.ready{display:inline-flex;gap:6px;align-items:center;color:#477a60;font-size:11px;font-weight:700}.ready i{width:6px;height:6px;border-radius:50%;background:#64a27b}.qr-stage{min-height:240px;border:1px solid #edf0e8;border-radius:16px;background:radial-gradient(circle at 1px 1px,#dce5d9 1px,transparent 0) 0 0/15px 15px,#fbfcf8;display:grid;place-items:center;padding:18px}.qr-stage img{display:block;width:min(100%,220px);aspect-ratio:1;object-fit:contain;background:#fff;padding:9px;border-radius:12px;box-shadow:0 8px 24px rgba(23,43,40,.1)}.download{width:100%;margin-top:12px;background:var(--lime);color:#26391e;padding:0 16px;text-decoration:none}.download:hover{background:#c9ea5a}.error{display:none;margin-top:12px;padding:11px 13px;background:#fff0ee;color:var(--danger);border-radius:10px;font-size:12px;line-height:1.5}.error.show{display:block}.privacy{margin:18px 0 0;display:flex;gap:8px;color:#818b85;font-size:11px;line-height:1.5}.privacy svg{width:15px;height:15px;flex:none;margin-top:1px;color:#6f8a78}
-    footer{border-top:1px solid rgba(23,43,40,.09);padding:19px 0 25px;color:#8a958e;font-size:11px}.foot{display:flex;justify-content:space-between;align-items:center;gap:16px}.foot strong{color:#53665e;font-weight:750}.foot a{color:inherit;text-decoration:none}.foot a:hover{color:var(--green)}
-    @keyframes appear{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:translateY(0)}}@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;transition-duration:.01ms!important}}
-    @media(max-width:900px){.layout{grid-template-columns:1fr;gap:35px;max-width:650px;margin:auto}.intro{padding-top:0}.intro h1{max-width:600px}.lead{max-width:560px}.trust{margin-top:20px}main{padding-top:45px}.maker{padding:26px}}
-    @media(max-width:520px){.shell{width:min(100% - 30px,1120px)}.topbar{height:70px}.topnote{font-size:10px;letter-spacing:.07em}.brand{font-size:17px}.brandmark{width:33px;height:33px}main{padding:34px 0 44px}.layout{gap:27px}h1{font-size:47px;margin:18px 0 14px}.lead{font-size:14px}.trust{gap:13px;font-size:11px}.maker{padding:20px;border-radius:19px}.cardhead{margin-bottom:20px}.cardhead h2{font-size:18px}.actions{flex-direction:column}.btn{min-height:47px}.btn-quiet{min-height:42px}.qr-stage{min-height:220px}.foot{align-items:flex-start;flex-direction:column;gap:7px}}
-
-    /* Refined editorial finish */
-    :root{--paper:#f7f5f0;--white:#fffefa;--ink:#292722;--muted:#77736b;--line:#e9e5dc;--green:#302e29;--green2:#927651;--lime:#eee8dc;--soft:#f3f0e9;--danger:#a53e36;--shadow:0 18px 48px rgba(47,42,33,.055)}
-    body{background:var(--paper);color:var(--ink)}
-    .topbar{height:82px;border-color:#e7e3da}
-    .brand{font-size:18px;letter-spacing:-.025em;font-weight:740}
-    .brandmark{width:34px;height:34px;border-radius:50%;background:#38352f;box-shadow:none}
-    .topnote{font-size:11px;letter-spacing:.035em;text-transform:none;font-weight:600;color:#827e75}
-    .live-dot{background:#aa916a;box-shadow:0 0 0 4px #aa916a18}
-    main{padding:78px 0 92px}
-    .layout{max-width:1040px;margin:auto;grid-template-columns:minmax(0,.9fr) minmax(400px,1.1fr);gap:86px}
-    .eyebrow{padding:0;background:none;border-radius:0;color:#8e7657;font-size:10px;letter-spacing:.16em;font-weight:760}
-    .eyebrow svg{display:none}
-    h1{font-family:Georgia,"Times New Roman",serif;font-size:clamp(45px,5.2vw,62px);line-height:1.075;letter-spacing:-.052em;font-weight:500;margin:23px 0 21px;max-width:510px}
-    .accent{color:#967b58;font-style:italic}
-    .lead{font-size:15px;line-height:1.8;color:#77736b;max-width:400px}
-    .trust{margin-top:27px;color:#767268;font-weight:550;font-size:11px;gap:18px}
-    .check{border-color:#d9d2c5;color:#8e7657}
-    .maker{background:var(--white);border:1px solid #e9e5dc;border-radius:17px;padding:31px;box-shadow:var(--shadow)}
-    .maker:before{display:none}
-    .cardhead{margin-bottom:26px}
-    .cardhead h2{font-family:Georgia,"Times New Roman",serif;font-size:23px;letter-spacing:-.025em;font-weight:500;margin-bottom:7px}
-    .cardhead p{font-size:12px;color:#858178}
-    .qrmini{width:38px;height:38px;border-radius:50%;background:#f4f0e8;color:#8e7657}
-    label{font-size:11px;letter-spacing:.015em;font-weight:700;color:#514e46}
-    .inputwrap textarea{min-height:112px;border-color:#e5e1d8;border-radius:10px;background:#fdfcf9;padding:15px 15px 32px;font-size:13px}
-    .inputwrap textarea:focus{border-color:#aa916a;box-shadow:0 0 0 3px rgba(170,145,106,.12)}
-    textarea::placeholder{color:#aaa69d}
-    .charcount{color:#a09b91}
-    .actions{gap:9px;margin-top:12px}
-    .btn{min-height:47px;border-radius:9px;font-size:12px;transition:background .18s,color .18s,transform .18s}
-    .btn-primary{background:#34322d;box-shadow:none;letter-spacing:.01em}
-    .btn-primary:hover{background:#4a463e;box-shadow:none}
-    .btn-quiet{background:transparent;border:1px solid #e5e1d8;color:#67635b}
-    .btn-quiet:hover{background:#f6f3ed}
-    .result{margin-top:22px;padding-top:20px;border-color:#ece8df}
-    .result-title{font-family:Georgia,"Times New Roman",serif;font-weight:500;font-size:15px}
-    .ready{color:#7e785f;font-weight:600}
-    .ready i{background:#9a8a65}
-    .qr-stage{min-height:230px;border:1px solid #eeebe4;border-radius:11px;background:#faf9f6;padding:16px}
-    .qr-stage img{width:min(100%,210px);padding:8px;border-radius:5px;box-shadow:none;border:1px solid #efede7}
-    .download{background:#eee8dc;color:#37342d;border:1px solid #e8e1d4;margin-top:10px}
-    .download:hover{background:#e5ddcf}
-    .privacy{margin-top:15px;color:#88847b;font-size:10px;line-height:1.6}
-    .privacy svg{color:#948267}
-    footer{border-color:#e7e3da;color:#8b877e;padding:18px 0 22px}
-    .foot strong{color:#605b52;font-weight:700}
-    @media(max-width:900px){.layout{max-width:620px;gap:34px}main{padding:51px 0 66px}.maker{padding:27px}}
-    @media(max-width:520px){.topbar{height:70px}.topnote{font-size:10px}main{padding:36px 0 48px}.layout{gap:25px}h1{font-size:45px;line-height:1.08;margin:18px 0 14px}.lead{font-size:14px}.trust{margin-top:19px;gap:12px}.maker{padding:21px;border-radius:14px}.cardhead{margin-bottom:20px}.cardhead h2{font-size:21px}.actions{flex-direction:row}.btn-primary{flex:1}.btn-quiet{min-width:94px}.qr-stage{min-height:215px}.foot{align-items:flex-start;flex-direction:column;gap:7px}}
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f6f0e5">
+<meta name="description" content="Buat QR code untuk tautan, teks, Wi-Fi, email, nomor telepon, dan lokasi.">
+<title>RuangQR — Pembuat QR</title>
+<style>
+:root{--ink:#183c3d;--teal:#78b6b1;--teal-dark:#286c68;--blue:#d8eaf2;--cream:#f7f0e5;--paper:#fffaf2;--sand:#e8d6b4;--muted:#637374;--line:#e7e3d8;--white:#fffefa;--shadow:0 14px 42px rgba(59,77,69,.09)}
+*{box-sizing:border-box}body{margin:0;background:var(--cream);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}.wrap{width:min(1260px,calc(100% - 48px));margin:auto}
+header{margin:28px auto 0;min-height:76px;padding:0 28px;background:rgba(255,254,250,.88);border:1px solid #eee7dc;border-radius:19px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 7px 25px rgba(60,70,60,.04)}
+.brand{display:flex;align-items:center;gap:12px;color:var(--teal-dark);font-size:26px;letter-spacing:-1.2px;font-weight:820;text-decoration:none}.brandmark{width:44px;height:44px;border-radius:50%;background:#9cc9c1;display:grid;place-items:center}.brandmark svg{width:28px;height:28px}.topright{display:flex;align-items:center;gap:17px}.lang{font-size:12px;font-weight:750;color:#627876;border:1px solid #e6e1d7;border-radius:10px;padding:8px 11px;background:#fffdf8}.free{font-size:12px;color:#687a78}
+main{padding:28px 0 34px}.dashboard{display:grid;grid-template-columns:1.04fr .96fr;gap:22px;align-items:stretch}.panel{min-height:680px;border:1px solid rgba(61,82,78,.06);border-radius:22px;padding:34px;box-shadow:var(--shadow)}.formpanel{background:var(--blue)}.resultpanel{background:var(--paper);display:flex;flex-direction:column}.kicker{font-size:11px;text-transform:uppercase;letter-spacing:.16em;font-weight:800;color:#558681;margin:0 0 14px}h1{font-size:clamp(34px,4vw,48px);letter-spacing:-2px;line-height:1.06;margin:0 0 14px;color:#173f42}.intro{font-size:15px;color:#52666c;line-height:1.65;max-width:530px;margin:0 0 26px}.content-label{display:block;font-size:14px;font-weight:750;margin:21px 0 10px;color:#1e383b}.types{display:flex;gap:8px;flex-wrap:wrap}.type{border:1px solid transparent;background:#eee2ca;color:#3d4846;border-radius:10px;padding:9px 14px;font-size:13px;font-weight:650;cursor:pointer;transition:.16s}.type:hover{transform:translateY(-1px)}.type.active{background:#85bcb5;color:#fff;border-color:#75aca5;box-shadow:0 5px 12px #76ada544}
+.field{width:100%;border:1px solid #b7cbc6;background:#f9fcf8;border-radius:11px;min-height:49px;padding:12px 15px;color:#243d3e;font:inherit;font-size:14px;outline:none;transition:.16s}.field:focus{border-color:#5d9d95;box-shadow:0 0 0 3px #5d9d9520}.field::placeholder{color:#91a09e}textarea.field{min-height:94px;resize:vertical;line-height:1.5}.fieldrow{display:grid;grid-template-columns:1fr 1fr;gap:12px}.fields{display:grid;gap:11px}.subfield-label{font-size:11px;font-weight:700;color:#506462;margin:0 0 6px;display:block}.fieldgroup{min-width:0}.customize{margin-top:22px;padding-top:18px;border-top:1px solid #c7d8d7}.custom-title{font-size:13px;font-weight:750;margin:0 0 12px}.colorrow{display:flex;align-items:center;gap:16px;flex-wrap:wrap}.colorcontrol{display:flex;align-items:center;gap:8px;font-size:12px;color:#536664;font-weight:650}.colorcontrol input[type=color]{appearance:none;border:1px solid #d4d8ce;background:transparent;padding:3px;width:38px;height:34px;border-radius:9px;cursor:pointer}.colorcontrol input[type=color]::-webkit-color-swatch-wrapper{padding:0}.colorcontrol input[type=color]::-webkit-color-swatch{border:0;border-radius:6px}.generate{width:100%;margin-top:22px;border:0;border-radius:13px;min-height:56px;background:#79b5b0;color:#fff;font-size:16px;font-weight:750;cursor:pointer;box-shadow:0 7px 15px #559b9440;transition:.18s}.generate:hover{background:#5ca29b;transform:translateY(-1px)}.generate:disabled{opacity:.65;cursor:wait;transform:none}.hint{font-size:11px;line-height:1.55;color:#627579;margin:12px 0 0}
+.resulthead{text-align:center;margin:3px 0 21px}.resulthead h2{font-size:27px;letter-spacing:-.9px;color:#2f6958;margin:0 0 5px}.resulthead p{font-size:12px;color:#82837a;margin:0}.qrbox{background:#fffefa;border:1px solid #f0e8dd;border-radius:18px;min-height:375px;flex:1;display:flex;align-items:center;justify-content:center;padding:24px;box-shadow:0 7px 24px rgba(66,64,54,.07)}.empty{text-align:center;color:#89938d;font-size:13px;line-height:1.6;max-width:230px}.empty-mark{width:62px;height:62px;margin:0 auto 17px;border-radius:18px;background:#f2f5ef;display:grid;place-items:center;color:#7eaaa1}.empty-mark svg{width:31px;height:31px}.qrimg{width:min(100%,300px);aspect-ratio:1;object-fit:contain;image-rendering:pixelated}.output-tools{display:none;grid-template-columns:1fr 1fr;gap:10px;margin-top:13px}.output-tools.visible{display:grid}.download{border:1px solid #9cbbb2;background:#f2f6ed;color:#346e5d;border-radius:11px;min-height:48px;text-decoration:none;display:flex;align-items:center;justify-content:center;gap:8px;font-size:13px;font-weight:700;cursor:pointer}.download.secondary{background:#dfeaf5;border-color:#c6d9ec;color:#3c6684}.download:hover{filter:brightness(.97)}.details{margin-top:17px;padding:16px 4px 0;border-top:1px solid #e8e1d5;display:grid;grid-template-columns:1fr 1fr;gap:12px;color:#716f67;font-size:11px}.detail strong{display:block;color:#354b49;font-size:12px;margin-bottom:5px}.error{display:none;color:#9b433d;background:#fff0eb;border-radius:9px;padding:10px 12px;font-size:12px;margin-top:12px}.error.show{display:block}footer{padding:8px 0 25px;color:#818179;font-size:12px}.foot{display:flex;justify-content:space-between;align-items:center;gap:12px}.foot strong{color:#4b6d67}
+@media(max-width:900px){.wrap{width:min(760px,calc(100% - 32px))}.dashboard{grid-template-columns:1fr}.panel{min-height:auto;padding:26px}.qrbox{min-height:340px}.resultpanel{padding-bottom:23px}}
+@media(max-width:520px){header{margin-top:14px;min-height:64px;padding:0 15px;border-radius:14px}.brand{font-size:22px;gap:9px}.brandmark{width:38px;height:38px}.brandmark svg{width:24px;height:24px}.topright{gap:9px}.free{display:none}.lang{padding:7px 9px}.wrap{width:calc(100% - 24px)}main{padding:15px 0 20px}.dashboard{gap:13px}.panel{padding:20px 17px;border-radius:16px}h1{font-size:36px;letter-spacing:-1.5px}.intro{font-size:14px;margin-bottom:21px}.type{padding:8px 11px;font-size:12px}.fieldrow{grid-template-columns:1fr}.resulthead h2{font-size:24px}.qrbox{min-height:280px;padding:16px}.output-tools{grid-template-columns:1fr 1fr}.details{gap:8px}.foot{flex-direction:column;align-items:flex-start;font-size:11px}}
+</style>
 </head>
 <body>
-  <header class="shell topbar">
-    <a class="brand" href="#top" aria-label="RuangQR beranda">
-      <span class="brandmark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4z" stroke="#fff" stroke-width="2"/><path d="M14 14h3v3h-3zM19 14v2h1v4h-4v-1M14 19h2" stroke="#d8f278" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-      RuangQR<span style="color:#79a68a">.</span>
-    </a>
-    <span class="topnote"><i class="live-dot"></i> Gratis, tanpa akun</span>
-  </header>
-  <main class="shell" id="top">
-    <div class="layout">
-      <section class="intro" aria-labelledby="title">
-        <span class="eyebrow"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12.5 9.3 17 19 7" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg> PEMBUAT QR ONLINE</span>
-        <h1 id="title">Tautan sederhana,<br><span class="accent">jadi kode QR.</span></h1>
-        <p class="lead">Tempel tautan atau tulis pesan. QR siap diunduh dalam beberapa detik—tanpa akun, tanpa langkah yang membingungkan.</p>
-        <div class="trust"><span><i class="check">✓</i> Bisa untuk tautan & teks</span><span><i class="check">✓</i> Siap dipindai</span></div>
-      </section>
-      <section class="maker" aria-labelledby="maker-title">
-        <div class="cardhead">
-          <div><h2 id="maker-title">Buat QR code</h2><p>Masukkan tautan atau teks yang ingin dibagikan.</p></div>
-          <span class="qrmini" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4z" stroke="currentColor" stroke-width="1.8"/><path d="M14 14h3v3h-3zM19 14v2m-5 3h2m3-1v2h2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+<header class="wrap">
+  <a class="brand" href="#top" aria-label="RuangQR beranda"><span class="brandmark"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3.5 3.5h6.5V10H3.5zM14 3.5h6.5V10H14zM3.5 14h6.5v6.5H3.5z" stroke="#fffefa" stroke-width="2"/><path d="M14 14h3v3h-3zM19 14v2m-5 4h2m3-2v2h2" stroke="#fffefa" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>RuangQR</a>
+  <div class="topright"><span class="free">Pembuat QR sederhana</span><span class="lang" aria-label="Bahasa Indonesia">ID · Bahasa Indonesia</span></div>
+</header>
+<main class="wrap" id="top">
+  <div class="dashboard">
+    <section class="panel formpanel" aria-labelledby="formtitle">
+      <p class="kicker">RuangQR · Gratis tanpa akun</p>
+      <h1 id="formtitle">Pembuat QR Code</h1>
+      <p class="intro">Buat QR dalam hitungan detik. Pilih jenis konten, masukkan detailnya, lalu unduh hasilnya. Data hanya dikirim ke layanan QR untuk membuat gambar.</p>
+      <span class="content-label">Jenis konten</span>
+      <div class="types" role="group" aria-label="Pilih jenis konten">
+        <button type="button" class="type active" data-type="url" aria-pressed="true">Tautan</button>
+        <button type="button" class="type" data-type="wifi" aria-pressed="false">Wi-Fi</button>
+        <button type="button" class="type" data-type="text" aria-pressed="false">Teks</button>
+        <button type="button" class="type" data-type="email" aria-pressed="false">Email</button>
+        <button type="button" class="type" data-type="phone" aria-pressed="false">Telepon</button>
+        <button type="button" class="type" data-type="location" aria-pressed="false">Lokasi</button>
+      </div>
+      <div id="fields" class="fields" style="margin-top:19px"></div>
+      <div class="customize">
+        <p class="custom-title">Sesuaikan warna</p>
+        <div class="colorrow">
+          <label class="colorcontrol">Warna QR <input type="color" id="qrcolor" value="#286c68" aria-label="Pilih warna QR"></label>
+          <label class="colorcontrol">Warna latar <input type="color" id="bgcolor" value="#fffaf1" aria-label="Pilih warna latar QR"></label>
         </div>
-        <form id="qrform">
-          <label for="qrtext">Isi QR</label>
-          <div class="inputwrap"><textarea id="qrtext" maxlength="1800" placeholder="Contoh: https://namabisnis.com atau tulis pesan singkat…" required></textarea><span class="charcount" id="charcount">0 / 1800</span></div>
-          <div class="actions">
-            <button class="btn btn-primary" id="makebtn" type="submit"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4zM14 14h3v3h-3zM19 14v2m-5 3h2m3-1v2h2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Buat QR code</span></button>
-            <button class="btn btn-quiet" id="clearbtn" type="button">Bersihkan</button>
-          </div>
-        </form>
-        <div class="error" id="error" role="alert"></div>
-        <section class="result" id="result" aria-live="polite">
-          <div class="result-row"><span class="result-title">QR kamu siap</span><span class="ready"><i></i> Siap dipindai</span></div>
-          <div class="qr-stage"><img id="qrimage" alt="QR code hasil pembuatan"></div>
-          <a class="btn download" id="download" href="#" download="ruangqr.png"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3v12m0 0 4-4m-4 4-4-4M5 17v3h14v-3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Unduh gambar QR</a>
-        </section>
-        <p class="privacy"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3 5 6v5c0 4.8 2.9 8.4 7 10 4.1-1.6 7-5.2 7-10V6l-7-3Z" stroke="currentColor" stroke-width="1.7"/><path d="m9 12 2 2 4-4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg><span>QR dibuat melalui layanan eksternal. Hindari memasukkan kata sandi, data pribadi, atau informasi rahasia.</span></p>
-      </section>
-    </div>
-  </main>
-  <footer><div class="shell foot"><span><strong>RuangQR.</strong> Dirancang untuk berbagi dengan mudah.</span><span>QR akan menyimpan persis isi yang kamu masukkan.</span></div></footer>
-  <script>
-    const form=document.getElementById('qrform');
-    const field=document.getElementById('qrtext');
-    const result=document.getElementById('result');
-    const errorBox=document.getElementById('error');
-    const makeButton=document.getElementById('makebtn');
-    const downloadLink=document.getElementById('download');
-    const qrImage=document.getElementById('qrimage');
-    let currentObjectUrl='';
-    field.addEventListener('input',()=>{
-      document.getElementById('charcount').textContent=field.value.length.toLocaleString('id-ID')+' / 1800';
-      errorBox.classList.remove('show');
-    });
-    document.getElementById('clearbtn').addEventListener('click',()=>{
-      field.value='';field.dispatchEvent(new Event('input'));result.classList.remove('visible');errorBox.classList.remove('show');field.focus();
-    });
-    form.addEventListener('submit',async event=>{
-      event.preventDefault();const text=field.value.trim();if(!text){field.focus();return;}
-      errorBox.classList.remove('show');makeButton.disabled=true;makeButton.querySelector('span').textContent='Sedang membuat…';
-      try{
-        const endpoint='https://api.qrserver.com/v1/create-qr-code/?size=360x360&margin=12&data='+encodeURIComponent(text);
-        const response=await fetch(endpoint);if(!response.ok)throw new Error('Layanan QR sedang tidak merespons ('+response.status+').');
-        const blob=await response.blob();if(!blob.type.startsWith('image/'))throw new Error('Layanan tidak mengirim gambar QR. Coba lagi sebentar.');
-        const nextUrl=URL.createObjectURL(blob);if(currentObjectUrl)URL.revokeObjectURL(currentObjectUrl);currentObjectUrl=nextUrl;
-        qrImage.src=currentObjectUrl;downloadLink.href=currentObjectUrl;result.classList.add('visible');result.scrollIntoView({behavior:'smooth',block:'nearest'});
-      }catch(err){errorBox.textContent=err instanceof TypeError?'Tidak dapat terhubung ke layanan QR. Periksa koneksi internet lalu coba lagi.':err.message;errorBox.classList.add('show');}
-      finally{makeButton.disabled=false;makeButton.querySelector('span').textContent='Buat QR code';}
-    });
-    window.addEventListener('beforeunload',()=>{if(currentObjectUrl)URL.revokeObjectURL(currentObjectUrl)});
-  </script>
+      </div>
+      <button class="generate" id="generate" type="button">Buat QR Code</button>
+      <p class="hint">QR dibuat melalui layanan eksternal. Jangan masukkan kata sandi atau informasi sensitif.</p>
+      <div class="error" id="error" role="alert"></div>
+    </section>
+    <section class="panel resultpanel" aria-labelledby="resulttitle">
+      <div class="resulthead"><h2 id="resulttitle">QR Anda</h2><p>Hasil siap dipindai dan dibagikan</p></div>
+      <div class="qrbox" id="qrbox"><div class="empty"><div class="empty-mark"><svg viewBox="0 0 24 24" fill="none"><path d="M3.5 3.5h6.5V10H3.5zM14 3.5h6.5V10H14zM3.5 14h6.5v6.5H3.5z" stroke="currentColor" stroke-width="1.8"/><path d="M14 14h3v3h-3zM19 14v2m-5 4h2m3-2v2h2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>QR code Anda akan muncul di sini setelah dibuat.</div></div>
+      <div class="output-tools" id="outputtools"><a class="download" id="pnglink" href="#" download="ruangqr.png">↓ &nbsp; Unduh PNG</a><button class="download secondary" id="svgbutton" type="button">↓ &nbsp; Unduh SVG</button></div>
+      <div class="details"><div class="detail"><strong>Ukuran</strong><span id="sizeinfo">512 × 512 px</span></div><div class="detail"><strong>Format</strong><span>PNG / SVG</span></div><div class="detail"><strong>Warna QR</strong><span id="colorinfo">Teal · Krem</span></div><div class="detail"><strong>Dibuat</strong><span id="created">—</span></div></div>
+    </section>
+  </div>
+</main>
+<footer class="wrap"><div class="foot"><span>© <span id="year"></span> <strong>RuangQR</strong> · Pembuat QR untuk sehari-hari</span><span>Ringkas, mudah, dalam Bahasa Indonesia.</span></div></footer>
+<script>
+const fields=document.getElementById('fields');let activeType='url',lastPayload='',lastPngUrl='';
+const definitions={
+ url:'<label class="fieldgroup"><span class="subfield-label">Alamat tautan</span><input class="field" id="urlvalue" type="url" placeholder="https://contoh.com" autocomplete="url"></label>',
+ text:'<label class="fieldgroup"><span class="subfield-label">Teks yang ingin dibagikan</span><textarea class="field" id="textvalue" placeholder="Tulis pesan singkat…" maxlength="1800"></textarea></label>',
+ wifi:'<div class="fieldrow"><label class="fieldgroup"><span class="subfield-label">Nama jaringan (SSID)</span><input class="field" id="ssid" placeholder="Nama Wi-Fi"></label><label class="fieldgroup"><span class="subfield-label">Kata sandi</span><input class="field" id="wifipass" type="password" placeholder="Kata sandi Wi-Fi"></label></div><label class="fieldgroup"><span class="subfield-label">Keamanan jaringan</span><select class="field" id="wifisecurity"><option value="WPA">WPA / WPA2</option><option value="WEP">WEP</option><option value="nopass">Tanpa kata sandi</option></select></label>',
+ email:'<label class="fieldgroup"><span class="subfield-label">Alamat email</span><input class="field" id="emailvalue" type="email" placeholder="nama@contoh.com"></label><div class="fieldrow"><label class="fieldgroup"><span class="subfield-label">Subjek (opsional)</span><input class="field" id="emailsubject" placeholder="Subjek email"></label><label class="fieldgroup"><span class="subfield-label">Pesan (opsional)</span><input class="field" id="emailbody" placeholder="Isi pesan"></label></div>',
+ phone:'<label class="fieldgroup"><span class="subfield-label">Nomor telepon</span><input class="field" id="phonevalue" type="tel" placeholder="+62 812 3456 7890"></label>',
+ location:'<div class="fieldrow"><label class="fieldgroup"><span class="subfield-label">Garis lintang</span><input class="field" id="latitude" type="number" step="any" min="-90" max="90" placeholder="-6.200000"></label><label class="fieldgroup"><span class="subfield-label">Garis bujur</span><input class="field" id="longitude" type="number" step="any" min="-180" max="180" placeholder="106.816666"></label></div>'
+};
+function renderFields(){fields.innerHTML=definitions[activeType];}
+document.querySelectorAll('.type').forEach(btn=>btn.addEventListener('click',()=>{activeType=btn.dataset.type;document.querySelectorAll('.type').forEach(b=>{const active=b===btn;b.classList.toggle('active',active);b.setAttribute('aria-pressed',String(active));});renderFields();document.getElementById('error').classList.remove('show');}));
+function escapeWifi(s){return s.replace(/([\\;,:"'])/g,'\\$1')}
+function getPayload(){
+ if(activeType==='url'){let s=document.getElementById('urlvalue').value.trim();if(!s)return '';if(!/^[a-zA-Z][a-zA-Z\d+.-]*:/.test(s))s='https://'+s;try{return new URL(s).href}catch{return ''}}
+ if(activeType==='text')return document.getElementById('textvalue').value.trim();
+ if(activeType==='wifi'){const s=document.getElementById('ssid').value.trim(),p=document.getElementById('wifipass').value,t=document.getElementById('wifisecurity').value;if(!s)return '';return `WIFI:T:${t};S:${escapeWifi(s)};${t==='nopass'?'':'P:'+escapeWifi(p)+';'};`}
+ if(activeType==='email'){const e=document.getElementById('emailvalue').value.trim();if(!e)return '';const q=new URLSearchParams();const sub=document.getElementById('emailsubject').value.trim(),body=document.getElementById('emailbody').value.trim();if(sub)q.set('subject',sub);if(body)q.set('body',body);return 'mailto:'+e+(q.toString()?'?'+q.toString():'')}
+ if(activeType==='phone'){const n=document.getElementById('phonevalue').value.trim();return n?'tel:'+n:''}
+ if(activeType==='location'){const a=document.getElementById('latitude').value,b=document.getElementById('longitude').value;if(a===''||b===''||Number(a)<-90||Number(a)>90||Number(b)<-180||Number(b)>180)return '';return `geo:${a},${b}`}
+ return '';
+}
+function endpoint(payload,format){const c=document.getElementById('qrcolor').value.slice(1),b=document.getElementById('bgcolor').value.slice(1);const q=new URLSearchParams({size:'512x512',margin:'12',format,color:c,bgcolor:b,data:payload});return 'https://api.qrserver.com/v1/create-qr-code/?'+q.toString()}
+function showError(text){const e=document.getElementById('error');e.textContent=text;e.classList.add('show')}
+async function getImage(url){const r=await fetch(url);if(!r.ok)throw new Error('Layanan QR tidak merespons ('+r.status+').');const b=await r.blob();if(!b.type.startsWith('image/'))throw new Error('Format gambar dari layanan QR tidak dikenali.');return b}
+document.getElementById('generate').addEventListener('click',async()=>{
+ const btn=document.getElementById('generate'),payload=getPayload();document.getElementById('error').classList.remove('show');
+ if(!payload){showError(activeType==='url'?'Masukkan tautan yang valid terlebih dahulu.':'Lengkapi kolom yang diperlukan terlebih dahulu.');return}
+ btn.disabled=true;btn.textContent='Sedang membuat QR…';
+ try{const blob=await getImage(endpoint(payload,'png'));if(lastPngUrl)URL.revokeObjectURL(lastPngUrl);lastPngUrl=URL.createObjectURL(blob);lastPayload=payload;
+ const img=document.createElement('img');img.className='qrimg';img.alt='QR code yang berisi '+payload.slice(0,80);img.src=lastPngUrl;const box=document.getElementById('qrbox');box.replaceChildren(img);document.getElementById('pnglink').href=lastPngUrl;document.getElementById('outputtools').classList.add('visible');
+ document.getElementById('created').textContent=new Intl.DateTimeFormat('id-ID',{dateStyle:'medium',timeStyle:'short'}).format(new Date());document.getElementById('colorinfo').textContent=document.getElementById('qrcolor').value.toUpperCase()+' · '+document.getElementById('bgcolor').value.toUpperCase();
+ }catch(e){showError(e instanceof TypeError?'Tidak dapat terhubung ke layanan QR. Periksa koneksi internet lalu coba lagi.':e.message)}finally{btn.disabled=false;btn.textContent='Buat QR Code'}
+});
+document.getElementById('svgbutton').addEventListener('click',async()=>{if(!lastPayload)return;const b=document.getElementById('svgbutton');b.disabled=true;b.textContent='Menyiapkan SVG…';try{const blob=await getImage(endpoint(lastPayload,'svg'));const u=URL.createObjectURL(blob),a=document.createElement('a');a.href=u;a.download='ruangqr.svg';a.click();setTimeout(()=>URL.revokeObjectURL(u),1000)}catch(e){showError('SVG tidak dapat diunduh: '+e.message)}finally{b.disabled=false;b.textContent='↓  Unduh SVG'}});
+renderFields();document.getElementById('year').textContent=new Date().getFullYear();
+</script>
 </body>
 </html>
