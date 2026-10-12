@@ -4,6 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#f6f0e5">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="icon" type="image/png" sizes="192x192" href="./icons/ruangqr-192.png">
+<link rel="apple-touch-icon" href="./icons/ruangqr-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="description" content="Buat QR code gratis online dari tautan, teks, Wi-Fi, email, telepon, atau lokasi. Sesuaikan warna, lalu unduh sebagai PNG atau SVG.">
 <meta name="keywords" content="pembuat QR code, QR code gratis, generator QR online, QR Wi-Fi, QR tautan, unduh QR PNG SVG">
 <meta name="robots" content="index, follow, max-image-preview:large">
@@ -70,12 +75,16 @@ footer.wrap{flex:none;padding:7px 0 10px}
 .dashboard.mode-result .resultpanel{height:auto;max-height:calc(100dvh - 170px)}
 @media(max-height:600px){.dashboard.mode-form .formpanel{max-height:calc(100dvh - 158px)}}
 @media(max-height:600px){.dashboard.mode-result .details{display:none}.dashboard.mode-result .resulthead{margin-bottom:5px}.dashboard.mode-result .qrbox{height:min(30vh,170px)}}
+
+.header-icon,.install-button{min-height:36px;border:1px solid #d9e4dc;border-radius:10px;background:#fffefa;color:#376d66;display:inline-flex;align-items:center;justify-content:center;gap:6px;cursor:pointer;font:inherit;font-size:12px;font-weight:750;transition:.16s}.header-icon{width:38px;padding:7px}.header-icon svg{width:19px;height:19px}.install-button{padding:7px 12px;background:#79b5b0;color:#fff;border-color:#79b5b0}.install-button svg{width:17px;height:17px}.header-icon:hover,.install-button:hover{filter:brightness(.96);transform:translateY(-1px)}.install-guide{width:min(420px,calc(100% - 32px));border:1px solid #e7e3d8;border-radius:18px;padding:24px;background:#fffaf2;color:#183c3d;box-shadow:0 18px 50px #183c3d30}.install-guide::backdrop{background:#172c2b66;backdrop-filter:blur(3px)}.install-guide h2{font-size:22px;margin:0 0 10px}.install-guide p{font-size:14px;line-height:1.55;color:#52666c;margin:0 0 18px}.install-guide button{border:0;background:#286c68;color:white;font:inherit;font-weight:700;border-radius:10px;padding:10px 16px;cursor:pointer}
+@media(max-width:520px){.topright{gap:6px}.free,.lang{display:none}.header-icon{width:32px;min-height:32px;padding:6px}.install-button{min-height:32px;padding:6px 9px;font-size:11px}}
+
 </style>
 </head>
 <body>
 <header class="wrap">
   <a class="brand" href="#top" aria-label="RuangQR beranda"><span class="brandmark"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3.5 3.5h6.5V10H3.5zM14 3.5h6.5V10H14zM3.5 14h6.5v6.5H3.5z" stroke="#fffefa" stroke-width="2"/><path d="M14 14h3v3h-3zM19 14v2m-5 4h2m3-2v2h2" stroke="#fffefa" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>RuangQR</a>
-  <div class="topright"><span class="free">Pembuat QR sederhana</span><span class="lang" aria-label="Bahasa Indonesia">ID · Bahasa Indonesia</span></div>
+  <div class="topright"><span class="free">Pembuat QR sederhana</span><button class="header-icon" id="refreshButton" type="button" title="Segarkan halaman" aria-label="Segarkan halaman"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 11a8 8 0 0 0-14.7-3L4 10m0-5v5h5M4 13a8 8 0 0 0 14.7 3L20 14m0 5v-5h-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button><button class="install-button" id="installButton" type="button" aria-label="Instal RuangQR"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3v11m0 0 4-4m-4 4-4-4M5 16v4h14v-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Instal</span></button><span class="lang" aria-label="Bahasa Indonesia">ID · Bahasa Indonesia</span></div>
 </header>
 <main class="wrap" id="top">
   <nav class="stepbar" aria-label="Langkah pembuatan QR">
@@ -118,6 +127,7 @@ footer.wrap{flex:none;padding:7px 0 10px}
   </div>
 </main>
 <footer class="wrap"><div class="foot"><span>© <span id="year"></span> <strong>RuangQR</strong> · Pembuat QR untuk sehari-hari</span><span>Ringkas, mudah, dalam Bahasa Indonesia.</span></div></footer>
+<dialog class="install-guide" id="installGuide" aria-labelledby="installTitle"><h2 id="installTitle">Pasang RuangQR</h2><p id="installInstructions">Ikuti petunjuk pemasangan dari browser Anda.</p><button id="closeInstallGuide" type="button">Mengerti</button></dialog>
 <script src="./qrcode.min.js"></script>
 <script>
 const fields=document.getElementById('fields');let activeType='url',lastPayload='',lastPngUrl='',lastSvgData='';
@@ -163,6 +173,13 @@ document.getElementById('generate').addEventListener('click',async()=>{
  }catch(e){showError('QR gagal dibuat. Periksa isi kolom atau gunakan teks yang lebih singkat.');console.error(e)}finally{btn.disabled=false;btn.textContent='Buat QR Code'}
 });
 document.getElementById('svgbutton').addEventListener('click',()=>{if(!lastSvgData)return;const blob=new Blob([lastSvgData],{type:'image/svg+xml;charset=utf-8'}),u=URL.createObjectURL(blob),a=document.createElement('a');a.href=u;a.download='ruangqr.svg';a.click();setTimeout(()=>URL.revokeObjectURL(u),1000)});
+const installButton=document.getElementById('installButton'),installGuide=document.getElementById('installGuide'),installInstructions=document.getElementById('installInstructions');let installPromptEvent=null;
+window.addEventListener('beforeinstallprompt',(event)=>{event.preventDefault();installPromptEvent=event;});
+installButton.addEventListener('click',async()=>{if(installPromptEvent){installPromptEvent.prompt();const choice=await installPromptEvent.userChoice;if(choice.outcome==='accepted')installButton.hidden=true;installPromptEvent=null;return;}const apple=/iphone|ipad|ipod/i.test(navigator.userAgent);const standalone=window.matchMedia('(display-mode: standalone)').matches||navigator.standalone===true;installInstructions.textContent=standalone?'RuangQR sudah berjalan sebagai aplikasi terpasang.':apple?'Di Safari, tekan tombol Bagikan lalu pilih “Tambahkan ke Layar Utama”.':'Buka menu browser (⋮ atau …), lalu pilih “Instal aplikasi” atau “Tambahkan ke layar utama”. RuangQR perlu dibuka melalui HTTPS.';installGuide.showModal();});
+document.getElementById('closeInstallGuide').addEventListener('click',()=>installGuide.close());
+window.addEventListener('appinstalled',()=>{installButton.hidden=true;});
+document.getElementById('refreshButton').addEventListener('click',()=>window.location.reload());
+if('serviceWorker' in navigator&&(location.protocol==='https:'||location.hostname==='localhost'||location.hostname==='127.0.0.1'))navigator.serviceWorker.register('./sw.js',{scope:'./'}).catch(error=>console.warn('Pendaftaran mode offline gagal:',error));
 renderFields();document.getElementById('year').textContent=new Date().getFullYear();
 </script>
 </body>

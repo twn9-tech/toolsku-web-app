@@ -1,0 +1,28 @@
+{
+  "id": "./",
+  "name": "RuangQR — Pembuat QR Code",
+  "short_name": "RuangQR",
+  "description": "Pembuat QR code gratis untuk tautan, Wi-Fi, teks, email, telepon, dan lokasi.",
+  "lang": "id-ID",
+  "start_url": "./?source=pwa",
+  "scope": "./",
+  "display": "standalone",
+  "display_override": ["standalone", "minimal-ui"],
+  "orientation": "portrait-primary",
+  "background_color": "#f7f0e5",
+  "theme_color": "#f6f0e5",
+  "icons": [
+    {
+      "src": "./icons/ruangqr-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "./icons/ruangqr-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
