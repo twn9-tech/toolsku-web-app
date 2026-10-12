@@ -87,7 +87,7 @@ footer.wrap{flex:none;padding:7px 0 10px}
     <section class="panel formpanel" aria-labelledby="formtitle">
       <p class="kicker">RuangQR · Gratis tanpa akun</p>
       <h1 id="formtitle">Pembuat QR Code Gratis</h1>
-      <p class="intro">Buat QR code gratis online dalam hitungan detik. Pilih tautan, Wi-Fi, teks, email, telepon, atau lokasi; sesuaikan warnanya dan unduh hasilnya. Data dikirim ke layanan QR hanya untuk membuat gambar.</p>
+      <p class="intro">Buat QR code gratis online dalam hitungan detik. Pilih tautan, Wi-Fi, teks, email, telepon, atau lokasi; sesuaikan warnanya dan unduh hasilnya. Proses berjalan langsung di browser; konten tidak dikirim ke server.</p>
       <span class="content-label">Jenis konten</span>
       <div class="types" role="group" aria-label="Pilih jenis konten">
         <button type="button" class="type active" data-type="url" aria-pressed="true">Tautan</button>
@@ -106,7 +106,7 @@ footer.wrap{flex:none;padding:7px 0 10px}
         </div>
       </div>
       <button class="generate" id="generate" type="button">Buat QR Code</button>
-      <p class="hint">QR dibuat melalui layanan eksternal. Jangan masukkan kata sandi atau informasi sensitif.</p>
+      <p class="hint">QR dibuat langsung di perangkat ini. Konten yang kamu masukkan tidak diunggah.</p>
       <div class="error" id="error" role="alert"></div>
     </section>
     <section class="panel resultpanel" aria-labelledby="resulttitle">
@@ -118,8 +118,9 @@ footer.wrap{flex:none;padding:7px 0 10px}
   </div>
 </main>
 <footer class="wrap"><div class="foot"><span>© <span id="year"></span> <strong>RuangQR</strong> · Pembuat QR untuk sehari-hari</span><span>Ringkas, mudah, dalam Bahasa Indonesia.</span></div></footer>
+<script src="./qrcode.min.js"></script>
 <script>
-const fields=document.getElementById('fields');let activeType='url',lastPayload='',lastPngUrl='';
+const fields=document.getElementById('fields');let activeType='url',lastPayload='',lastPngUrl='',lastSvgData='';
 const dashboard=document.getElementById('dashboard'),step1=document.getElementById('step1'),step2=document.getElementById('step2');
 function showStep(which){const result=which==='result';dashboard.classList.toggle('mode-form',!result);dashboard.classList.toggle('mode-result',result);step1.classList.toggle('active',!result);step2.classList.toggle('active',result);step1.toggleAttribute('aria-current',!result);if(!result)step1.setAttribute('aria-current','step');else step1.removeAttribute('aria-current');if(result)step2.setAttribute('aria-current','step');else step2.removeAttribute('aria-current');window.scrollTo(0,0)}
 step1.addEventListener('click',()=>showStep('form'));
@@ -144,19 +145,24 @@ function getPayload(){
  if(activeType==='location'){const a=document.getElementById('latitude').value,b=document.getElementById('longitude').value;if(a===''||b===''||Number(a)<-90||Number(a)>90||Number(b)<-180||Number(b)>180)return '';return `geo:${a},${b}`}
  return '';
 }
-function endpoint(payload,format){const c=document.getElementById('qrcolor').value.slice(1),b=document.getElementById('bgcolor').value.slice(1);const q=new URLSearchParams({size:'512x512',margin:'12',format,color:c,bgcolor:b,data:payload});return 'https://api.qrserver.com/v1/create-qr-code/?'+q.toString()}
 function showError(text){const e=document.getElementById('error');e.textContent=text;e.classList.add('show')}
-async function getImage(url){const r=await fetch(url);if(!r.ok)throw new Error('Layanan QR tidak merespons ('+r.status+').');const b=await r.blob();if(!b.type.startsWith('image/'))throw new Error('Format gambar dari layanan QR tidak dikenali.');return b}
+function makeSvg(qr,dark,light){const model=qr._oQRCode,n=model.getModuleCount(),quiet=4,total=n+quiet*2;let d='';for(let y=0;y<n;y++)for(let x=0;x<n;x++)if(model.isDark(y,x))d+=`M${x+quiet} ${y+quiet}h1v1h-1z`;return `<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 ${total} ${total}" shape-rendering="crispEdges"><rect width="${total}" height="${total}" fill="${light}"/><path d="${d}" fill="${dark}"/></svg>`}
+function makePngBlob(canvas,modules,light){const out=document.createElement('canvas');out.width=512;out.height=512;const ctx=out.getContext('2d');ctx.fillStyle=light;ctx.fillRect(0,0,512,512);const quiet=512*4/(modules+8);ctx.imageSmoothingEnabled=false;ctx.drawImage(canvas,quiet,quiet,512-quiet*2,512-quiet*2);return new Promise(resolve=>out.toBlob(resolve,'image/png'))}
 document.getElementById('generate').addEventListener('click',async()=>{
  const btn=document.getElementById('generate'),payload=getPayload();document.getElementById('error').classList.remove('show');
  if(!payload){showError(activeType==='url'?'Masukkan tautan yang valid terlebih dahulu.':'Lengkapi kolom yang diperlukan terlebih dahulu.');return}
  btn.disabled=true;btn.textContent='Sedang membuat QR…';
- try{const blob=await getImage(endpoint(payload,'png'));if(lastPngUrl)URL.revokeObjectURL(lastPngUrl);lastPngUrl=URL.createObjectURL(blob);lastPayload=payload;
- const img=document.createElement('img');img.className='qrimg';img.alt='QR code yang berisi '+payload.slice(0,80);img.src=lastPngUrl;const box=document.getElementById('qrbox');box.replaceChildren(img);document.getElementById('pnglink').href=lastPngUrl;document.getElementById('outputtools').classList.add('visible');
- document.getElementById('created').textContent=new Intl.DateTimeFormat('id-ID',{dateStyle:'medium',timeStyle:'short'}).format(new Date());document.getElementById('colorinfo').textContent=document.getElementById('qrcolor').value.toUpperCase()+' · '+document.getElementById('bgcolor').value.toUpperCase();showStep('result');
- }catch(e){showError(e instanceof TypeError?'Tidak dapat terhubung ke layanan QR. Periksa koneksi internet lalu coba lagi.':e.message)}finally{btn.disabled=false;btn.textContent='Buat QR Code'}
+ try{
+  const dark=document.getElementById('qrcolor').value,light=document.getElementById('bgcolor').value,host=document.createElement('div');
+  const qr=new QRCode(host,{text:payload,width:512,height:512,colorDark:dark,colorLight:light,correctLevel:QRCode.CorrectLevel.M});
+  const canvas=host.querySelector('canvas');if(!canvas||!qr._oQRCode)throw new Error('QR tidak dapat dibuat pada perangkat ini.');
+  const blob=await makePngBlob(canvas,qr._oQRCode.getModuleCount(),light);if(!blob)throw new Error('Gagal menyiapkan gambar PNG.');
+  if(lastPngUrl)URL.revokeObjectURL(lastPngUrl);lastPngUrl=URL.createObjectURL(blob);lastPayload=payload;lastSvgData=makeSvg(qr,dark,light);
+  const img=document.createElement('img');img.className='qrimg';img.alt='QR code yang berisi '+payload.slice(0,80);img.src=lastPngUrl;const box=document.getElementById('qrbox');box.replaceChildren(img);document.getElementById('pnglink').href=lastPngUrl;document.getElementById('outputtools').classList.add('visible');
+  document.getElementById('created').textContent=new Intl.DateTimeFormat('id-ID',{dateStyle:'medium',timeStyle:'short'}).format(new Date());document.getElementById('colorinfo').textContent=dark.toUpperCase()+' · '+light.toUpperCase();showStep('result');
+ }catch(e){showError('QR gagal dibuat. Periksa isi kolom atau gunakan teks yang lebih singkat.');console.error(e)}finally{btn.disabled=false;btn.textContent='Buat QR Code'}
 });
-document.getElementById('svgbutton').addEventListener('click',async()=>{if(!lastPayload)return;const b=document.getElementById('svgbutton');b.disabled=true;b.textContent='Menyiapkan SVG…';try{const blob=await getImage(endpoint(lastPayload,'svg'));const u=URL.createObjectURL(blob),a=document.createElement('a');a.href=u;a.download='ruangqr.svg';a.click();setTimeout(()=>URL.revokeObjectURL(u),1000)}catch(e){showError('SVG tidak dapat diunduh: '+e.message)}finally{b.disabled=false;b.textContent='↓  Unduh SVG'}});
+document.getElementById('svgbutton').addEventListener('click',()=>{if(!lastSvgData)return;const blob=new Blob([lastSvgData],{type:'image/svg+xml;charset=utf-8'}),u=URL.createObjectURL(blob),a=document.createElement('a');a.href=u;a.download='ruangqr.svg';a.click();setTimeout(()=>URL.revokeObjectURL(u),1000)});
 renderFields();document.getElementById('year').textContent=new Date().getFullYear();
 </script>
 </body>

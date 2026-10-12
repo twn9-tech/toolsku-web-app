@@ -13,7 +13,7 @@ Buka `index.html` langsung, atau jalankan `python3 -m http.server 8000` dan kunj
 
 ## Privasi
 
-Konten dan pilihan warna dikirim ke layanan eksternal QR Server untuk menghasilkan gambar. Hindari memasukkan kata sandi, data pribadi, atau informasi sensitif.
+QR dibuat sepenuhnya di browser menggunakan pustaka lokal; konten dan warna tidak dikirim ke server. Pustaka QRCode.js disertakan dengan lisensi MIT di `QRCODEJS-LICENSE.txt`.
 
 ## Deploy
 
