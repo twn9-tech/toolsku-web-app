@@ -3,9 +3,9 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#f5f4ef">
+  <meta name="theme-color" content="#f7f5f0">
   <meta name="description" content="Buat QR code gratis dari tautan atau teks. Simpan gambar QR dalam satu klik, langsung dari browser.">
-  <title>RuangQR — Pembuat QR Code</title>
+  <title>RuangQR — QR Code untuk Tautan &amp; Teks</title>
   <style>
     :root{--paper:#f5f4ef;--white:#fffefa;--ink:#172b28;--muted:#71807b;--line:#e7e9e2;--green:#174e43;--green2:#236c5c;--lime:#d8f278;--soft:#edf2e9;--danger:#a53e36;--shadow:0 24px 70px rgba(28,54,46,.09)}
     *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;min-height:100vh;background:var(--paper);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
@@ -20,6 +20,55 @@
     @keyframes appear{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:translateY(0)}}@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;transition-duration:.01ms!important}}
     @media(max-width:900px){.layout{grid-template-columns:1fr;gap:35px;max-width:650px;margin:auto}.intro{padding-top:0}.intro h1{max-width:600px}.lead{max-width:560px}.trust{margin-top:20px}main{padding-top:45px}.maker{padding:26px}}
     @media(max-width:520px){.shell{width:min(100% - 30px,1120px)}.topbar{height:70px}.topnote{font-size:10px;letter-spacing:.07em}.brand{font-size:17px}.brandmark{width:33px;height:33px}main{padding:34px 0 44px}.layout{gap:27px}h1{font-size:47px;margin:18px 0 14px}.lead{font-size:14px}.trust{gap:13px;font-size:11px}.maker{padding:20px;border-radius:19px}.cardhead{margin-bottom:20px}.cardhead h2{font-size:18px}.actions{flex-direction:column}.btn{min-height:47px}.btn-quiet{min-height:42px}.qr-stage{min-height:220px}.foot{align-items:flex-start;flex-direction:column;gap:7px}}
+
+    /* Refined editorial finish */
+    :root{--paper:#f7f5f0;--white:#fffefa;--ink:#292722;--muted:#77736b;--line:#e9e5dc;--green:#302e29;--green2:#927651;--lime:#eee8dc;--soft:#f3f0e9;--danger:#a53e36;--shadow:0 18px 48px rgba(47,42,33,.055)}
+    body{background:var(--paper);color:var(--ink)}
+    .topbar{height:82px;border-color:#e7e3da}
+    .brand{font-size:18px;letter-spacing:-.025em;font-weight:740}
+    .brandmark{width:34px;height:34px;border-radius:50%;background:#38352f;box-shadow:none}
+    .topnote{font-size:11px;letter-spacing:.035em;text-transform:none;font-weight:600;color:#827e75}
+    .live-dot{background:#aa916a;box-shadow:0 0 0 4px #aa916a18}
+    main{padding:78px 0 92px}
+    .layout{max-width:1040px;margin:auto;grid-template-columns:minmax(0,.9fr) minmax(400px,1.1fr);gap:86px}
+    .eyebrow{padding:0;background:none;border-radius:0;color:#8e7657;font-size:10px;letter-spacing:.16em;font-weight:760}
+    .eyebrow svg{display:none}
+    h1{font-family:Georgia,"Times New Roman",serif;font-size:clamp(45px,5.2vw,62px);line-height:1.075;letter-spacing:-.052em;font-weight:500;margin:23px 0 21px;max-width:510px}
+    .accent{color:#967b58;font-style:italic}
+    .lead{font-size:15px;line-height:1.8;color:#77736b;max-width:400px}
+    .trust{margin-top:27px;color:#767268;font-weight:550;font-size:11px;gap:18px}
+    .check{border-color:#d9d2c5;color:#8e7657}
+    .maker{background:var(--white);border:1px solid #e9e5dc;border-radius:17px;padding:31px;box-shadow:var(--shadow)}
+    .maker:before{display:none}
+    .cardhead{margin-bottom:26px}
+    .cardhead h2{font-family:Georgia,"Times New Roman",serif;font-size:23px;letter-spacing:-.025em;font-weight:500;margin-bottom:7px}
+    .cardhead p{font-size:12px;color:#858178}
+    .qrmini{width:38px;height:38px;border-radius:50%;background:#f4f0e8;color:#8e7657}
+    label{font-size:11px;letter-spacing:.015em;font-weight:700;color:#514e46}
+    .inputwrap textarea{min-height:112px;border-color:#e5e1d8;border-radius:10px;background:#fdfcf9;padding:15px 15px 32px;font-size:13px}
+    .inputwrap textarea:focus{border-color:#aa916a;box-shadow:0 0 0 3px rgba(170,145,106,.12)}
+    textarea::placeholder{color:#aaa69d}
+    .charcount{color:#a09b91}
+    .actions{gap:9px;margin-top:12px}
+    .btn{min-height:47px;border-radius:9px;font-size:12px;transition:background .18s,color .18s,transform .18s}
+    .btn-primary{background:#34322d;box-shadow:none;letter-spacing:.01em}
+    .btn-primary:hover{background:#4a463e;box-shadow:none}
+    .btn-quiet{background:transparent;border:1px solid #e5e1d8;color:#67635b}
+    .btn-quiet:hover{background:#f6f3ed}
+    .result{margin-top:22px;padding-top:20px;border-color:#ece8df}
+    .result-title{font-family:Georgia,"Times New Roman",serif;font-weight:500;font-size:15px}
+    .ready{color:#7e785f;font-weight:600}
+    .ready i{background:#9a8a65}
+    .qr-stage{min-height:230px;border:1px solid #eeebe4;border-radius:11px;background:#faf9f6;padding:16px}
+    .qr-stage img{width:min(100%,210px);padding:8px;border-radius:5px;box-shadow:none;border:1px solid #efede7}
+    .download{background:#eee8dc;color:#37342d;border:1px solid #e8e1d4;margin-top:10px}
+    .download:hover{background:#e5ddcf}
+    .privacy{margin-top:15px;color:#88847b;font-size:10px;line-height:1.6}
+    .privacy svg{color:#948267}
+    footer{border-color:#e7e3da;color:#8b877e;padding:18px 0 22px}
+    .foot strong{color:#605b52;font-weight:700}
+    @media(max-width:900px){.layout{max-width:620px;gap:34px}main{padding:51px 0 66px}.maker{padding:27px}}
+    @media(max-width:520px){.topbar{height:70px}.topnote{font-size:10px}main{padding:36px 0 48px}.layout{gap:25px}h1{font-size:45px;line-height:1.08;margin:18px 0 14px}.lead{font-size:14px}.trust{margin-top:19px;gap:12px}.maker{padding:21px;border-radius:14px}.cardhead{margin-bottom:20px}.cardhead h2{font-size:21px}.actions{flex-direction:row}.btn-primary{flex:1}.btn-quiet{min-width:94px}.qr-stage{min-height:215px}.foot{align-items:flex-start;flex-direction:column;gap:7px}}
   </style>
 </head>
 <body>
@@ -28,13 +77,13 @@
       <span class="brandmark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4z" stroke="#fff" stroke-width="2"/><path d="M14 14h3v3h-3zM19 14v2h1v4h-4v-1M14 19h2" stroke="#d8f278" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
       RuangQR<span style="color:#79a68a">.</span>
     </a>
-    <span class="topnote"><i class="live-dot"></i> Gratis · Langsung di browser</span>
+    <span class="topnote"><i class="live-dot"></i> Gratis, tanpa akun</span>
   </header>
   <main class="shell" id="top">
     <div class="layout">
       <section class="intro" aria-labelledby="title">
-        <span class="eyebrow"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12.5 9.3 17 19 7" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg> Praktis, cepat, gratis</span>
-        <h1 id="title">Jadikan apa saja <span class="accent">kode QR.</span></h1>
+        <span class="eyebrow"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12.5 9.3 17 19 7" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg> PEMBUAT QR ONLINE</span>
+        <h1 id="title">Tautan sederhana,<br><span class="accent">jadi kode QR.</span></h1>
         <p class="lead">Tempel tautan atau tulis pesan. QR siap diunduh dalam beberapa detik—tanpa akun, tanpa langkah yang membingungkan.</p>
         <div class="trust"><span><i class="check">✓</i> Bisa untuk tautan & teks</span><span><i class="check">✓</i> Siap dipindai</span></div>
       </section>
@@ -61,7 +110,7 @@
       </section>
     </div>
   </main>
-  <footer><div class="shell foot"><span><strong>RuangQR.</strong> Satu hal, dibuat sesederhana mungkin.</span><span>QR akan menyimpan persis isi yang kamu masukkan.</span></div></footer>
+  <footer><div class="shell foot"><span><strong>RuangQR.</strong> Dirancang untuk berbagi dengan mudah.</span><span>QR akan menyimpan persis isi yang kamu masukkan.</span></div></footer>
   <script>
     const form=document.getElementById('qrform');
     const field=document.getElementById('qrtext');
