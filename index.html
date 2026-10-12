@@ -1,98 +1,96 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="ToolsKu menyediakan alat online gratis: penghitung kata, pembuat QR code, generator password, kalkulator, dan konverter satuan.">
-<meta name="theme-color" content="#111827">
-<title>ToolsKu — Alat Online Gratis</title>
-<style>
-:root{--bg:#f5f7fb;--ink:#172033;--muted:#697386;--line:#e5e9f2;--primary:#635bff;--primary2:#8b5cf6;--card:#fff;--green:#12a875}
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
-button,input,textarea,select{font:inherit}button{cursor:pointer}.wrap{max-width:1120px;margin:auto;padding:0 22px}
-header{background:rgba(255,255,255,.9);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:10;backdrop-filter:blur(14px)}
-.nav{height:72px;display:flex;align-items:center;justify-content:space-between;gap:20px}.brand{display:flex;align-items:center;gap:10px;font-size:21px;font-weight:850;letter-spacing:-.7px}.logo{width:36px;height:36px;border-radius:12px;background:linear-gradient(135deg,var(--primary),var(--primary2));display:grid;place-items:center;color:#fff;font-weight:900;box-shadow:0 7px 18px #635bff40}.navlinks{display:flex;gap:24px;color:var(--muted);font-size:14px}.navlinks a{color:inherit;text-decoration:none}.navlinks a:hover{color:var(--primary)}
-.hero{padding:64px 0 36px;background:radial-gradient(ellipse at 15% 0%,#e6e4ff 0,transparent 42%),radial-gradient(ellipse at 90% 15%,#dff8ef 0,transparent 34%)}
-.eyebrow{display:inline-flex;gap:8px;align-items:center;background:#fff;border:1px solid #e8e8ff;border-radius:100px;padding:7px 12px;color:#5a50e6;font-size:12px;font-weight:750}.dot{width:7px;height:7px;border-radius:50%;background:var(--green)}
-h1{font-size:clamp(36px,5.4vw,58px);line-height:1.06;letter-spacing:-2.7px;margin:18px 0 16px;max-width:760px}.gradient{background:linear-gradient(90deg,#635bff,#a855f7);-webkit-background-clip:text;background-clip:text;color:transparent}.sub{color:var(--muted);font-size:17px;line-height:1.7;max-width:660px;margin:0}
-.searchbar{margin-top:27px;display:flex;gap:10px;max-width:640px;background:#fff;border:1px solid var(--line);border-radius:15px;padding:7px;box-shadow:0 12px 35px #26345a0b}.searchbar input{border:0;outline:0;min-width:0;flex:1;padding:10px 12px;background:transparent}.searchbar button,.primary{border:0;background:var(--primary);color:#fff;font-weight:750;border-radius:10px;padding:12px 17px}.searchbar button:hover,.primary:hover{background:#5148e5}
-.trust{display:flex;gap:18px;flex-wrap:wrap;margin-top:19px;color:#657086;font-size:12px}.trust span{display:flex;align-items:center;gap:6px}
-main{padding:34px 0 70px}.sectionhead{display:flex;justify-content:space-between;align-items:end;gap:16px;margin-bottom:19px}.sectionhead h2{font-size:25px;letter-spacing:-.8px;margin:0 0 5px}.sectionhead p{margin:0;color:var(--muted);font-size:14px}.tag{font-size:12px;background:#eeedff;color:#6257e8;padding:7px 10px;border-radius:8px;font-weight:700}
-.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}.tool{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:21px;min-height:190px;transition:transform .2s,box-shadow .2s,border-color .2s;cursor:pointer}.tool:hover{transform:translateY(-3px);box-shadow:0 16px 35px #26345a0d;border-color:#c9c6ff}.toolicon{height:45px;width:45px;border-radius:13px;display:grid;place-items:center;font-size:22px;margin-bottom:17px}.violet{background:#eeecff}.mint{background:#e2f9ef}.orange{background:#fff0df}.blue{background:#e3f2ff}.pink{background:#ffe8f2}.yellow{background:#fff6d9}.tool h3{font-size:16px;margin:0 0 7px}.tool p{font-size:13px;line-height:1.55;color:var(--muted);margin:0}.arrow{float:right;color:#9aa2b2;font-size:18px}
-.panel{margin-top:30px;background:#fff;border:1px solid var(--line);border-radius:20px;padding:25px;box-shadow:0 8px 25px #26345a06}.paneltop{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:18px}.paneltop h2{font-size:21px;margin:0;letter-spacing:-.6px}.close{border:1px solid var(--line);background:#fff;border-radius:9px;padding:8px 12px;color:var(--muted)}
-.toolview{display:none}.toolview.active{display:block}.fieldlabel{display:block;font-size:13px;font-weight:750;margin:0 0 8px}.field,textarea,select{width:100%;border:1px solid #dfe4ee;background:#fbfcff;border-radius:11px;padding:12px 13px;outline:none;color:var(--ink)}.field:focus,textarea:focus,select:focus{border-color:#9b95ff;box-shadow:0 0 0 3px #635bff18}textarea{min-height:150px;resize:vertical;line-height:1.6}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:13px}.secondary{background:#fff;border:1px solid var(--line);border-radius:10px;padding:11px 15px;font-weight:700;color:var(--ink)}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:13px}.stat{background:#f6f7fc;border-radius:12px;padding:13px}.stat small{display:block;color:var(--muted);font-size:12px}.stat strong{display:block;font-size:22px;margin-top:4px}.two{display:grid;grid-template-columns:1fr 1fr;gap:18px}.resultbox{background:#f6f7fc;border:1px dashed #d6dbea;border-radius:14px;padding:15px;min-height:90px;display:grid;place-items:center;text-align:center;overflow-wrap:anywhere}.qrimg{max-width:210px;width:100%;height:auto;background:white;border-radius:10px}.hint{font-size:12px;color:var(--muted);line-height:1.5;margin-top:10px}.range{width:100%;accent-color:var(--primary)}.checkrow{display:flex;gap:12px;flex-wrap:wrap;margin:12px 0}.checkrow label{font-size:13px;color:var(--muted);display:flex;gap:6px;align-items:center}
-footer{border-top:1px solid var(--line);background:#fff;padding:27px 0;color:var(--muted);font-size:13px}.foot{display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap}.notice{background:#f0fdf7;border:1px solid #d1fae5;border-radius:12px;padding:13px 15px;font-size:13px;color:#16754f;margin-top:20px}
-@media(max-width:760px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.hero{padding-top:46px}.navlinks{display:none}h1{letter-spacing:-1.8px}.two{grid-template-columns:1fr}.sectionhead{align-items:start;flex-direction:column}}
-@media(max-width:480px){.wrap{padding:0 15px}.grid{grid-template-columns:1fr}.tool{min-height:auto}.searchbar button{padding:11px 12px}.panel{padding:17px}.stats{grid-template-columns:1fr 1fr}.stats .stat:last-child{grid-column:span 2}.trust{gap:10px}}
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f4ef">
+  <meta name="description" content="Buat QR code gratis dari tautan atau teks. Simpan gambar QR dalam satu klik, langsung dari browser.">
+  <title>RuangQR — Pembuat QR Code</title>
+  <style>
+    :root{--paper:#f5f4ef;--white:#fffefa;--ink:#172b28;--muted:#71807b;--line:#e7e9e2;--green:#174e43;--green2:#236c5c;--lime:#d8f278;--soft:#edf2e9;--danger:#a53e36;--shadow:0 24px 70px rgba(28,54,46,.09)}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;min-height:100vh;background:var(--paper);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
+    button,textarea{font:inherit}.shell{width:min(1120px,calc(100% - 48px));margin:auto}.topbar{height:86px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(23,43,40,.09)}
+    .brand{display:flex;align-items:center;gap:11px;text-decoration:none;color:var(--ink);font-weight:800;letter-spacing:-.04em;font-size:19px}.brandmark{width:36px;height:36px;border-radius:12px;background:var(--green);display:grid;place-items:center;box-shadow:0 6px 14px rgba(23,78,67,.16)}.brandmark svg{width:21px;height:21px}.topnote{font-size:12px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:var(--muted);display:flex;align-items:center;gap:9px}.live-dot{width:7px;height:7px;border-radius:100%;background:#65a887;box-shadow:0 0 0 4px #65a88720}
+    main{padding:64px 0 70px}.layout{display:grid;grid-template-columns:minmax(0,.92fr) minmax(420px,1.08fr);gap:76px;align-items:center}.intro{padding:8px 0}.eyebrow{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;background:#e9eddf;border-radius:999px;color:var(--green);font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase}.eyebrow svg{width:14px;height:14px}h1{font-size:clamp(44px,6vw,70px);line-height:.99;letter-spacing:-.075em;margin:23px 0 20px;font-weight:780;max-width:530px}.accent{color:var(--green2)}.lead{font-size:16px;line-height:1.75;color:#697771;max-width:440px;margin:0}.trust{display:flex;gap:19px;flex-wrap:wrap;margin-top:31px;color:#61736b;font-size:12px;font-weight:650}.trust span{display:flex;align-items:center;gap:7px}.check{width:17px;height:17px;border:1px solid #c8d2c5;border-radius:100%;display:grid;place-items:center;color:var(--green2);font-size:11px}
+    .maker{background:var(--white);border:1px solid rgba(23,43,40,.08);border-radius:24px;padding:30px;box-shadow:var(--shadow);position:relative;overflow:hidden}.maker:before{content:"";position:absolute;right:-42px;top:-60px;width:170px;height:170px;border:1px solid #dfe7d6;border-radius:50%;pointer-events:none}.cardhead{position:relative;display:flex;justify-content:space-between;align-items:flex-start;gap:14px;margin-bottom:25px}.cardhead h2{font-size:20px;letter-spacing:-.04em;margin:0 0 6px}.cardhead p{font-size:13px;color:var(--muted);margin:0;line-height:1.55}.qrmini{width:42px;height:42px;border-radius:13px;background:var(--soft);display:grid;place-items:center;color:var(--green);flex:none}.qrmini svg{width:22px;height:22px}
+    label{font-size:12px;font-weight:750;display:block;margin:0 0 9px}.inputwrap{position:relative}.inputwrap textarea{display:block;width:100%;min-height:104px;resize:vertical;border:1px solid #dfe4dc;border-radius:13px;background:#fff;padding:15px 15px 33px;color:var(--ink);outline:none;line-height:1.55;font-size:14px;transition:border .18s,box-shadow .18s}.inputwrap textarea:focus{border-color:#72a58e;box-shadow:0 0 0 4px rgba(71,137,107,.12)}textarea::placeholder{color:#a2aaa4}.charcount{position:absolute;bottom:11px;right:13px;color:#98a29b;font-size:10px;pointer-events:none}
+    .actions{display:flex;gap:10px;margin-top:13px}.btn{min-height:49px;border-radius:12px;border:0;display:inline-flex;align-items:center;justify-content:center;gap:9px;font-weight:750;cursor:pointer;transition:transform .16s,background .16s,box-shadow .16s}.btn:active{transform:translateY(1px)}.btn-primary{flex:1;background:var(--green);color:white;padding:0 18px;box-shadow:0 8px 16px rgba(23,78,67,.15)}.btn-primary:hover{background:#0f4037;box-shadow:0 10px 20px rgba(23,78,67,.2)}.btn-primary:disabled{opacity:.65;cursor:wait}.btn-primary svg,.btn-quiet svg{width:17px;height:17px}.btn-quiet{background:#f1f2ec;color:#42524c;padding:0 15px}.btn-quiet:hover{background:#e7eae1}
+    .result{display:none;margin-top:23px;padding-top:22px;border-top:1px solid var(--line);animation:appear .28s ease}.result.visible{display:block}.result-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:13px}.result-title{font-size:13px;font-weight:750}.ready{display:inline-flex;gap:6px;align-items:center;color:#477a60;font-size:11px;font-weight:700}.ready i{width:6px;height:6px;border-radius:50%;background:#64a27b}.qr-stage{min-height:240px;border:1px solid #edf0e8;border-radius:16px;background:radial-gradient(circle at 1px 1px,#dce5d9 1px,transparent 0) 0 0/15px 15px,#fbfcf8;display:grid;place-items:center;padding:18px}.qr-stage img{display:block;width:min(100%,220px);aspect-ratio:1;object-fit:contain;background:#fff;padding:9px;border-radius:12px;box-shadow:0 8px 24px rgba(23,43,40,.1)}.download{width:100%;margin-top:12px;background:var(--lime);color:#26391e;padding:0 16px;text-decoration:none}.download:hover{background:#c9ea5a}.error{display:none;margin-top:12px;padding:11px 13px;background:#fff0ee;color:var(--danger);border-radius:10px;font-size:12px;line-height:1.5}.error.show{display:block}.privacy{margin:18px 0 0;display:flex;gap:8px;color:#818b85;font-size:11px;line-height:1.5}.privacy svg{width:15px;height:15px;flex:none;margin-top:1px;color:#6f8a78}
+    footer{border-top:1px solid rgba(23,43,40,.09);padding:19px 0 25px;color:#8a958e;font-size:11px}.foot{display:flex;justify-content:space-between;align-items:center;gap:16px}.foot strong{color:#53665e;font-weight:750}.foot a{color:inherit;text-decoration:none}.foot a:hover{color:var(--green)}
+    @keyframes appear{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:translateY(0)}}@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;transition-duration:.01ms!important}}
+    @media(max-width:900px){.layout{grid-template-columns:1fr;gap:35px;max-width:650px;margin:auto}.intro{padding-top:0}.intro h1{max-width:600px}.lead{max-width:560px}.trust{margin-top:20px}main{padding-top:45px}.maker{padding:26px}}
+    @media(max-width:520px){.shell{width:min(100% - 30px,1120px)}.topbar{height:70px}.topnote{font-size:10px;letter-spacing:.07em}.brand{font-size:17px}.brandmark{width:33px;height:33px}main{padding:34px 0 44px}.layout{gap:27px}h1{font-size:47px;margin:18px 0 14px}.lead{font-size:14px}.trust{gap:13px;font-size:11px}.maker{padding:20px;border-radius:19px}.cardhead{margin-bottom:20px}.cardhead h2{font-size:18px}.actions{flex-direction:column}.btn{min-height:47px}.btn-quiet{min-height:42px}.qr-stage{min-height:220px}.foot{align-items:flex-start;flex-direction:column;gap:7px}}
+  </style>
 </head>
 <body>
-<header><div class="wrap nav">
-  <div class="brand"><div class="logo">T</div>ToolsKu<span style="color:var(--primary)">.</span></div>
-  <nav class="navlinks"><a href="#alat">Semua alat</a><a href="#alat" onclick="openTool('words');return false">Penghitung kata</a><a href="#alat" onclick="openTool('qr');return false">QR Code</a></nav>
-  <a href="#alat" style="text-decoration:none"><button class="primary">Mulai gratis</button></a>
-</div></header>
-<section class="hero"><div class="wrap">
-  <span class="eyebrow"><span class="dot"></span> GRATIS • LANGSUNG DI BROWSER</span>
-  <h1>Alat online praktis,<br><span class="gradient">semua dalam satu tempat.</span></h1>
-  <p class="sub">Bereskan pekerjaan sehari-hari dengan alat gratis yang simpel, cepat, dan mudah digunakan. Tanpa perlu membuat akun.</p>
-  <div class="searchbar"><input id="search" placeholder="Cari alat, misalnya QR code..." aria-label="Cari alat"><button onclick="filterTools()">Cari alat</button></div>
-  <div class="trust"><span>✓ Gratis digunakan</span><span>✓ Tampilan ramah HP</span><span>✓ Tanpa registrasi</span></div>
-</div></section>
-<main class="wrap" id="alat">
-  <div class="sectionhead"><div><h2>Alat populer</h2><p>Pilih alat yang ingin kamu gunakan.</p></div><span class="tag">6 alat tersedia</span></div>
-  <div class="grid" id="toolgrid">
-    <article class="tool" data-name="penghitung kata word counter karakter tulisan" onclick="openTool('words')"><span class="arrow">↗</span><div class="toolicon violet">⌁</div><h3>Penghitung Kata</h3><p>Hitung jumlah kata, karakter, dan perkiraan waktu baca dari teks.</p></article>
-    <article class="tool" data-name="pembuat qr code qr kode tautan url" onclick="openTool('qr')"><span class="arrow">↗</span><div class="toolicon mint">▦</div><h3>Pembuat QR Code</h3><p>Ubah tautan atau teks menjadi kode QR yang bisa disimpan.</p></article>
-    <article class="tool" data-name="generator password kata sandi keamanan" onclick="openTool('password')"><span class="arrow">↗</span><div class="toolicon orange">✳</div><h3>Generator Password</h3><p>Buat kata sandi acak dengan panjang dan kombinasi pilihanmu.</p></article>
-    <article class="tool" data-name="kalkulator hitung matematika" onclick="openTool('calc')"><span class="arrow">↗</span><div class="toolicon blue">＋</div><h3>Kalkulator</h3><p>Lakukan perhitungan dasar dengan cepat langsung di halaman.</p></article>
-    <article class="tool" data-name="konverter satuan panjang berat suhu" onclick="openTool('convert')"><span class="arrow">↗</span><div class="toolicon pink">⇄</div><h3>Konverter Satuan</h3><p>Konversi satuan panjang, berat, dan suhu dengan mudah.</p></article>
-    <article class="tool" data-name="hitung diskon harga persentase belanja" onclick="openTool('discount')"><span class="arrow">↗</span><div class="toolicon yellow">%</div><h3>Kalkulator Diskon</h3><p>Hitung harga setelah diskon dan jumlah uang yang dihemat.</p></article>
-  </div>
-  <section class="panel" id="workspace" style="display:none">
-    <div class="paneltop"><h2 id="paneltitle">Alat online</h2><button class="close" onclick="closeTool()">Tutup ×</button></div>
-    <div class="toolview" id="view-words">
-      <label class="fieldlabel" for="wordtext">Masukkan teks</label><textarea id="wordtext" placeholder="Tempel atau ketik teks di sini..." oninput="countWords()"></textarea>
-      <div class="stats"><div class="stat"><small>Jumlah kata</small><strong id="wordcount">0</strong></div><div class="stat"><small>Karakter</small><strong id="charcount">0</strong></div><div class="stat"><small>Waktu baca</small><strong id="readtime">0 mnt</strong></div></div>
-      <div class="actions"><button class="secondary" onclick="document.getElementById('wordtext').value='';countWords()">Bersihkan teks</button><button class="primary" onclick="copyText(document.getElementById('wordtext').value)">Salin teks</button></div>
+  <header class="shell topbar">
+    <a class="brand" href="#top" aria-label="RuangQR beranda">
+      <span class="brandmark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4z" stroke="#fff" stroke-width="2"/><path d="M14 14h3v3h-3zM19 14v2h1v4h-4v-1M14 19h2" stroke="#d8f278" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      RuangQR<span style="color:#79a68a">.</span>
+    </a>
+    <span class="topnote"><i class="live-dot"></i> Gratis · Langsung di browser</span>
+  </header>
+  <main class="shell" id="top">
+    <div class="layout">
+      <section class="intro" aria-labelledby="title">
+        <span class="eyebrow"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12.5 9.3 17 19 7" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg> Praktis, cepat, gratis</span>
+        <h1 id="title">Jadikan apa saja <span class="accent">kode QR.</span></h1>
+        <p class="lead">Tempel tautan atau tulis pesan. QR siap diunduh dalam beberapa detik—tanpa akun, tanpa langkah yang membingungkan.</p>
+        <div class="trust"><span><i class="check">✓</i> Bisa untuk tautan & teks</span><span><i class="check">✓</i> Siap dipindai</span></div>
+      </section>
+      <section class="maker" aria-labelledby="maker-title">
+        <div class="cardhead">
+          <div><h2 id="maker-title">Buat QR code</h2><p>Masukkan tautan atau teks yang ingin dibagikan.</p></div>
+          <span class="qrmini" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4z" stroke="currentColor" stroke-width="1.8"/><path d="M14 14h3v3h-3zM19 14v2m-5 3h2m3-1v2h2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </div>
+        <form id="qrform">
+          <label for="qrtext">Isi QR</label>
+          <div class="inputwrap"><textarea id="qrtext" maxlength="1800" placeholder="Contoh: https://namabisnis.com atau tulis pesan singkat…" required></textarea><span class="charcount" id="charcount">0 / 1800</span></div>
+          <div class="actions">
+            <button class="btn btn-primary" id="makebtn" type="submit"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4zM14 14h3v3h-3zM19 14v2m-5 3h2m3-1v2h2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Buat QR code</span></button>
+            <button class="btn btn-quiet" id="clearbtn" type="button">Bersihkan</button>
+          </div>
+        </form>
+        <div class="error" id="error" role="alert"></div>
+        <section class="result" id="result" aria-live="polite">
+          <div class="result-row"><span class="result-title">QR kamu siap</span><span class="ready"><i></i> Siap dipindai</span></div>
+          <div class="qr-stage"><img id="qrimage" alt="QR code hasil pembuatan"></div>
+          <a class="btn download" id="download" href="#" download="ruangqr.png"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3v12m0 0 4-4m-4 4-4-4M5 17v3h14v-3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Unduh gambar QR</a>
+        </section>
+        <p class="privacy"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3 5 6v5c0 4.8 2.9 8.4 7 10 4.1-1.6 7-5.2 7-10V6l-7-3Z" stroke="currentColor" stroke-width="1.7"/><path d="m9 12 2 2 4-4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg><span>QR dibuat melalui layanan eksternal. Hindari memasukkan kata sandi, data pribadi, atau informasi rahasia.</span></p>
+      </section>
     </div>
-    <div class="toolview" id="view-qr">
-      <div class="two"><div><label class="fieldlabel" for="qrtext">Tautan atau teks</label><input class="field" id="qrtext" placeholder="https://contoh.com"><div class="actions"><button class="primary" onclick="makeQR()">Buat QR Code</button></div><p class="hint">Untuk membuat gambar QR, alat ini menghubungi layanan QR eksternal. Jangan masukkan informasi rahasia.</p></div><div class="resultbox" id="qrresult">QR Code akan muncul di sini</div></div>
-    </div>
-    <div class="toolview" id="view-password">
-      <div class="two"><div><label class="fieldlabel">Panjang password: <strong id="passlenlabel">16</strong></label><input class="range" id="passlen" type="range" min="8" max="40" value="16" oninput="document.getElementById('passlenlabel').textContent=this.value"><div class="checkrow"><label><input id="upper" type="checkbox" checked> Huruf besar</label><label><input id="lower" type="checkbox" checked> Huruf kecil</label><label><input id="nums" type="checkbox" checked> Angka</label><label><input id="symbols" type="checkbox" checked> Simbol</label></div><button class="primary" onclick="makePassword()">Buat password</button></div><div><label class="fieldlabel">Password kamu</label><div class="resultbox" id="passresult" style="font-weight:800;font-size:17px;min-height:70px">Klik “Buat password”</div><div class="actions"><button class="secondary" onclick="copyText(document.getElementById('passresult').textContent)">Salin password</button></div><p class="hint">Password dibuat di browser ini. Simpan di pengelola kata sandi yang aman.</p></div></div>
-    </div>
-    <div class="toolview" id="view-calc">
-      <label class="fieldlabel" for="calcexpr">Perhitungan</label><input class="field" id="calcexpr" placeholder="Contoh: (125000 * 3) - 50000"><div class="actions"><button class="primary" onclick="calculate()">Hitung</button><button class="secondary" onclick="document.getElementById('calcexpr').value='';document.getElementById('calcresult').textContent='Hasil akan muncul di sini'">Bersihkan</button></div><div class="resultbox" id="calcresult" style="margin-top:14px">Hasil akan muncul di sini</div><p class="hint">Gunakan angka, tanda kurung, +, −, *, /, dan %. Ekspresi lain akan ditolak.</p>
-    </div>
-    <div class="toolview" id="view-convert">
-      <div class="two"><div><label class="fieldlabel" for="convtype">Jenis konversi</label><select id="convtype" onchange="updateUnits()"><option value="length">Panjang</option><option value="weight">Berat</option><option value="temp">Suhu</option></select><label class="fieldlabel" for="convvalue" style="margin-top:14px">Nilai</label><input class="field" id="convvalue" type="number" value="1" oninput="convertUnits()"></div><div><label class="fieldlabel" for="fromunit">Dari</label><select id="fromunit" onchange="convertUnits()"></select><label class="fieldlabel" for="tounit" style="margin-top:14px">Ke</label><select id="tounit" onchange="convertUnits()"></select></div></div><div class="resultbox" id="convresult" style="margin-top:16px;font-size:22px;font-weight:800">Hasil konversi</div>
-    </div>
-    <div class="toolview" id="view-discount">
-      <div class="two"><div><label class="fieldlabel" for="price">Harga awal (Rp)</label><input class="field" id="price" type="number" min="0" value="100000" oninput="discountCalc()"><label class="fieldlabel" for="disc" style="margin-top:14px">Diskon (%)</label><input class="field" id="disc" type="number" min="0" max="100" value="20" oninput="discountCalc()"></div><div><div class="stat"><small>Harga setelah diskon</small><strong id="finalprice">Rp80.000</strong></div><div class="stat" style="margin-top:10px"><small>Uang yang dihemat</small><strong id="saved">Rp20.000</strong></div></div></div>
-    </div>
-    <div class="notice">Tips: halaman demo ini berjalan tanpa akun. Beberapa fitur seperti QR Code memerlukan koneksi internet.</div>
-  </section>
-</main>
-<footer><div class="wrap foot"><span><strong style="color:var(--ink)">ToolsKu.</strong> Alat online praktis untuk semua.</span><span>Gratis digunakan · Dibuat untuk web dan perangkat seluler</span></div></footer>
-<script>
-const titles={words:'Penghitung Kata',qr:'Pembuat QR Code',password:'Generator Password',calc:'Kalkulator',convert:'Konverter Satuan',discount:'Kalkulator Diskon'};
-function openTool(name){document.querySelectorAll('.toolview').forEach(x=>x.classList.remove('active'));document.getElementById('view-'+name).classList.add('active');document.getElementById('paneltitle').textContent=titles[name];document.getElementById('workspace').style.display='block';document.getElementById('workspace').scrollIntoView({behavior:'smooth',block:'start'});if(name==='convert'){updateUnits()}}
-function closeTool(){document.getElementById('workspace').style.display='none'}
-function filterTools(){const q=document.getElementById('search').value.trim().toLowerCase();let count=0;document.querySelectorAll('.tool').forEach(el=>{const show=el.dataset.name.includes(q)||el.innerText.toLowerCase().includes(q);el.style.display=show?'':'none';if(show)count++});document.querySelector('.sectionhead p').textContent=q?count+' alat cocok dengan pencarianmu.':'Pilih alat yang ingin kamu gunakan.';document.getElementById('alat').scrollIntoView({behavior:'smooth'})}
-document.getElementById('search').addEventListener('keydown',e=>{if(e.key==='Enter')filterTools()});
-function countWords(){const s=document.getElementById('wordtext').value;const words=s.trim()?s.trim().split(/\s+/).length:0;document.getElementById('wordcount').textContent=words.toLocaleString('id-ID');document.getElementById('charcount').textContent=s.length.toLocaleString('id-ID');document.getElementById('readtime').textContent=words?Math.max(1,Math.ceil(words/200))+' mnt':'0 mnt'}
-function copyText(t){if(!t||t==='Klik “Buat password”'){alert('Belum ada teks untuk disalin.');return}if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(t).then(()=>alert('Berhasil disalin.')).catch(()=>fallbackCopy(t))}else fallbackCopy(t)}
-function fallbackCopy(t){const x=document.createElement('textarea');x.value=t;document.body.appendChild(x);x.select();try{document.execCommand('copy');alert('Berhasil disalin.')}catch(e){alert('Salin teks secara manual.')}x.remove()}
-function makeQR(){const t=document.getElementById('qrtext').value.trim(),box=document.getElementById('qrresult');if(!t){alert('Masukkan teks atau tautan terlebih dahulu.');return}box.innerHTML='';const img=document.createElement('img');img.className='qrimg';img.alt='QR Code untuk teks yang dimasukkan';img.src='https://api.qrserver.com/v1/create-qr-code/?size=240x240&data='+encodeURIComponent(t);img.onerror=()=>box.textContent='QR tidak dapat dibuat. Periksa koneksi internet.';box.appendChild(img);const a=document.createElement('a');a.href=img.src;a.download='toolsku-qr.png';a.textContent='Simpan gambar QR';a.style.cssText='display:block;margin-top:10px;color:#635bff;font-size:13px;font-weight:700';box.appendChild(a)}
-function makePassword(){let chars='';if(document.getElementById('upper').checked)chars+='ABCDEFGHJKLMNPQRSTUVWXYZ';if(document.getElementById('lower').checked)chars+='abcdefghijkmnopqrstuvwxyz';if(document.getElementById('nums').checked)chars+='23456789';if(document.getElementById('symbols').checked)chars+='!@#$%&*_-+=';if(!chars){alert('Pilih setidaknya satu jenis karakter.');return}const n=+document.getElementById('passlen').value;let out='';const bytes=new Uint32Array(n);if(window.crypto&&crypto.getRandomValues){crypto.getRandomValues(bytes);for(let i=0;i<n;i++)out+=chars[bytes[i]%chars.length]}else{for(let i=0;i<n;i++)out+=chars[Math.floor(Math.random()*chars.length)]}document.getElementById('passresult').textContent=out}
-function calculate(){const s=document.getElementById('calcexpr').value.trim(),out=document.getElementById('calcresult');if(!s){out.textContent='Masukkan perhitungan terlebih dahulu.';return}if(!/^[0-9+\-*/().%\s]+$/.test(s)){out.textContent='Ekspresi tidak valid.';return}try{const result=Function('"use strict";return ('+s.replace(/(\d+(?:\.\d+)?)%/g,'($1/100)')+')')();out.textContent=Number.isFinite(result)?result.toLocaleString('id-ID',{maximumFractionDigits:10}):'Hasil tidak valid'}catch(e){out.textContent='Periksa kembali perhitunganmu.'}}
-const units={length:{mm:.001,cm:.01,m:1,km:1000,in:.0254,ft:.3048},weight:{mg:.000001,g:.001,kg:1,ton:1000,oz:.0283495,lb:.453592},temp:{'°C':'C','°F':'F','K':'K'}};
-function updateUnits(){const type=document.getElementById('convtype').value,opts=Object.keys(units[type]),f=document.getElementById('fromunit'),t=document.getElementById('tounit');f.innerHTML='';t.innerHTML='';opts.forEach((u,i)=>{f.add(new Option(u,u));t.add(new Option(u,u))});if(type==='length'){f.value='m';t.value='cm'}else if(type==='weight'){f.value='kg';t.value='g'}else{f.value='°C';t.value='°F'}convertUnits()}
-function convertUnits(){const type=document.getElementById('convtype').value,from=document.getElementById('fromunit').value,to=document.getElementById('tounit').value,v=Number(document.getElementById('convvalue').value);if(!from||!to||!Number.isFinite(v))return;let r;if(type==='temp'){let c=from==='°C'?v:from==='°F'?(v-32)*5/9:v-273.15;r=to==='°C'?c:to==='°F'?c*9/5+32:c+273.15}else r=v*units[type][from]/units[type][to];document.getElementById('convresult').textContent=r.toLocaleString('id-ID',{maximumFractionDigits:8})+' '+to}
-function rupiah(n){return new Intl.NumberFormat('id-ID',{style:'currency',currency:'IDR',maximumFractionDigits:0}).format(n)}
-function discountCalc(){const p=Math.max(0,Number(document.getElementById('price').value)||0),d=Math.min(100,Math.max(0,Number(document.getElementById('disc').value)||0));document.getElementById('finalprice').textContent=rupiah(p*(1-d/100));document.getElementById('saved').textContent=rupiah(p*d/100)}
-updateUnits();discountCalc();
-</script>
+  </main>
+  <footer><div class="shell foot"><span><strong>RuangQR.</strong> Satu hal, dibuat sesederhana mungkin.</span><span>QR akan menyimpan persis isi yang kamu masukkan.</span></div></footer>
+  <script>
+    const form=document.getElementById('qrform');
+    const field=document.getElementById('qrtext');
+    const result=document.getElementById('result');
+    const errorBox=document.getElementById('error');
+    const makeButton=document.getElementById('makebtn');
+    const downloadLink=document.getElementById('download');
+    const qrImage=document.getElementById('qrimage');
+    let currentObjectUrl='';
+    field.addEventListener('input',()=>{
+      document.getElementById('charcount').textContent=field.value.length.toLocaleString('id-ID')+' / 1800';
+      errorBox.classList.remove('show');
+    });
+    document.getElementById('clearbtn').addEventListener('click',()=>{
+      field.value='';field.dispatchEvent(new Event('input'));result.classList.remove('visible');errorBox.classList.remove('show');field.focus();
+    });
+    form.addEventListener('submit',async event=>{
+      event.preventDefault();const text=field.value.trim();if(!text){field.focus();return;}
+      errorBox.classList.remove('show');makeButton.disabled=true;makeButton.querySelector('span').textContent='Sedang membuat…';
+      try{
+        const endpoint='https://api.qrserver.com/v1/create-qr-code/?size=360x360&margin=12&data='+encodeURIComponent(text);
+        const response=await fetch(endpoint);if(!response.ok)throw new Error('Layanan QR sedang tidak merespons ('+response.status+').');
+        const blob=await response.blob();if(!blob.type.startsWith('image/'))throw new Error('Layanan tidak mengirim gambar QR. Coba lagi sebentar.');
+        const nextUrl=URL.createObjectURL(blob);if(currentObjectUrl)URL.revokeObjectURL(currentObjectUrl);currentObjectUrl=nextUrl;
+        qrImage.src=currentObjectUrl;downloadLink.href=currentObjectUrl;result.classList.add('visible');result.scrollIntoView({behavior:'smooth',block:'nearest'});
+      }catch(err){errorBox.textContent=err instanceof TypeError?'Tidak dapat terhubung ke layanan QR. Periksa koneksi internet lalu coba lagi.':err.message;errorBox.classList.add('show');}
+      finally{makeButton.disabled=false;makeButton.querySelector('span').textContent='Buat QR code';}
+    });
+    window.addEventListener('beforeunload',()=>{if(currentObjectUrl)URL.revokeObjectURL(currentObjectUrl)});
+  </script>
 </body>
 </html>

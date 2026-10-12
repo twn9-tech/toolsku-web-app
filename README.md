@@ -1,10 +1,15 @@
-# ToolsKu — Alat Online Gratis
+# RuangQR — Pembuat QR Code
 
-Aplikasi web statis berbahasa Indonesia berisi enam alat praktis: penghitung kata, pembuat QR code, generator password, kalkulator, konverter satuan, dan kalkulator diskon.
+Situs statis sederhana untuk membuat QR code dari tautan atau teks. Tidak membutuhkan akun, build step, atau backend.
 
-## Menjalankan secara lokal
+## Cara menggunakan
 
-Tidak memerlukan instalasi dependency atau build step. Buka `index.html` langsung di browser, atau jalankan server lokal:
+1. Buka situs GitHub Pages repo.
+2. Tempel tautan atau ketik teks pada kolom **Isi QR**.
+3. Tekan **Buat QR code**.
+4. Setelah pratinjau muncul, tekan **Unduh gambar QR**.
+
+Bisa dijalankan secara lokal dengan membuka `index.html` atau memakai server sederhana:
 
 ```bash
 python3 -m http.server 8000
@@ -12,27 +17,10 @@ python3 -m http.server 8000
 
 Lalu buka <http://localhost:8000>.
 
-## Fitur
+## Privasi
 
-- **Penghitung kata** — menghitung kata, karakter, dan estimasi waktu baca; salin/bersihkan teks.
-- **Pembuat QR Code** — membuat QR dari teks/URL melalui layanan eksternal QR Server. Jangan masukkan data rahasia.
-- **Generator password** — panjang 8–40 karakter dengan opsi huruf besar/kecil, angka, dan simbol.
-- **Kalkulator** — operasi aritmetika dasar dengan pemeriksaan input.
-- **Konverter satuan** — panjang, berat, dan suhu.
-- **Kalkulator diskon** — harga akhir dan jumlah penghematan dalam Rupiah.
-- Desain responsif untuk desktop dan ponsel; tidak memerlukan akun/backend.
+Gambar QR dibuat melalui layanan eksternal QR Server. Isi yang dimasukkan dikirim ke layanan tersebut untuk membuat gambarnya; jangan gunakan kata sandi atau data rahasia.
 
-## Deploy ke GitHub Pages
+## Deploy
 
-1. Buka **Settings → Pages** pada repo.
-2. Pada **Build and deployment**, pilih **Deploy from a branch**.
-3. Pilih branch `main` dan folder `/ (root)`, lalu **Save**.
-4. Setelah proses deployment selesai, situs tersedia di URL GitHub Pages yang ditampilkan di halaman tersebut.
-
-## Catatan privasi
-
-Fitur utama berjalan di browser. Fitur QR mengirimkan teks/URL yang dimasukkan ke `api.qrserver.com` untuk menghasilkan gambar. Jangan gunakan untuk informasi sensitif.
-
-## Lisensi
-
-Belum ditentukan. Tambahkan file lisensi jika ingin menetapkan ketentuan penggunaan kode.
+GitHub Pages memakai branch `main`, folder `/ (root)`. File halaman utama adalah `index.html`.
