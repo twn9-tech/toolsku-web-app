@@ -4,10 +4,10 @@ Aplikasi web statis berbahasa Indonesia untuk membuat QR dari tautan, Wi-Fi, tek
 
 ## Cara menggunakan
 
-1. Pilih jenis konten.
-2. Isi detail yang diminta.
-3. Atur warna QR/latar bila perlu.
-4. Tekan **Buat QR Code**, lalu unduh PNG atau SVG.
+1. Pada layar pertama, pilih jenis konten dan isi detail yang diminta.
+2. Atur warna QR/latar bila perlu, lalu tekan **Buat QR Code**.
+3. Setelah selesai, situs otomatis berpindah ke layar kedua. Unduh PNG atau SVG di sana.
+4. Gunakan tab **Isi QR** untuk kembali tanpa menggulir halaman.
 
 Buka `index.html` langsung, atau jalankan `python3 -m http.server 8000` dan kunjungi <http://localhost:8000>.
 

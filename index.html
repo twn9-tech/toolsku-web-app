@@ -33,6 +33,34 @@ main{padding:28px 0 34px}.dashboard{display:grid;grid-template-columns:1.04fr .9
 .resulthead{text-align:center;margin:3px 0 21px}.resulthead h2{font-size:27px;letter-spacing:-.9px;color:#2f6958;margin:0 0 5px}.resulthead p{font-size:12px;color:#82837a;margin:0}.qrbox{background:#fffefa;border:1px solid #f0e8dd;border-radius:18px;min-height:375px;flex:1;display:flex;align-items:center;justify-content:center;padding:24px;box-shadow:0 7px 24px rgba(66,64,54,.07)}.empty{text-align:center;color:#89938d;font-size:13px;line-height:1.6;max-width:230px}.empty-mark{width:62px;height:62px;margin:0 auto 17px;border-radius:18px;background:#f2f5ef;display:grid;place-items:center;color:#7eaaa1}.empty-mark svg{width:31px;height:31px}.qrimg{width:min(100%,300px);aspect-ratio:1;object-fit:contain;image-rendering:pixelated}.output-tools{display:none;grid-template-columns:1fr 1fr;gap:10px;margin-top:13px}.output-tools.visible{display:grid}.download{border:1px solid #9cbbb2;background:#f2f6ed;color:#346e5d;border-radius:11px;min-height:48px;text-decoration:none;display:flex;align-items:center;justify-content:center;gap:8px;font-size:13px;font-weight:700;cursor:pointer}.download.secondary{background:#dfeaf5;border-color:#c6d9ec;color:#3c6684}.download:hover{filter:brightness(.97)}.details{margin-top:17px;padding:16px 4px 0;border-top:1px solid #e8e1d5;display:grid;grid-template-columns:1fr 1fr;gap:12px;color:#716f67;font-size:11px}.detail strong{display:block;color:#354b49;font-size:12px;margin-bottom:5px}.error{display:none;color:#9b433d;background:#fff0eb;border-radius:9px;padding:10px 12px;font-size:12px;margin-top:12px}.error.show{display:block}footer{padding:8px 0 25px;color:#818179;font-size:12px}.foot{display:flex;justify-content:space-between;align-items:center;gap:12px}.foot strong{color:#4b6d67}
 @media(max-width:900px){.wrap{width:min(760px,calc(100% - 32px))}.dashboard{grid-template-columns:1fr}.panel{min-height:auto;padding:26px}.qrbox{min-height:340px}.resultpanel{padding-bottom:23px}}
 @media(max-width:520px){header{margin-top:14px;min-height:64px;padding:0 15px;border-radius:14px}.brand{font-size:22px;gap:9px}.brandmark{width:38px;height:38px}.brandmark svg{width:24px;height:24px}.topright{gap:9px}.free{display:none}.lang{padding:7px 9px}.wrap{width:calc(100% - 24px)}main{padding:15px 0 20px}.dashboard{gap:13px}.panel{padding:20px 17px;border-radius:16px}h1{font-size:36px;letter-spacing:-1.5px}.intro{font-size:14px;margin-bottom:21px}.type{padding:8px 11px;font-size:12px}.fieldrow{grid-template-columns:1fr}.resulthead h2{font-size:24px}.qrbox{min-height:280px;padding:16px}.output-tools{grid-template-columns:1fr 1fr}.details{gap:8px}.foot{flex-direction:column;align-items:flex-start;font-size:11px}}
+
+/* Two-screen flow: keep the work area inside the viewport. */
+html,body{height:100%;height:100dvh;overflow:hidden}
+body{min-height:100svh;display:flex;flex-direction:column}
+header.wrap{flex:none}
+main.wrap{flex:1;min-height:0;display:flex;flex-direction:column;justify-content:center;gap:12px;padding:10px 0 8px}
+.stepbar{display:flex;align-items:center;justify-content:center;gap:12px;flex:none;height:38px}
+.step{border:1px solid #dcded4;background:#fffaf2;color:#83918d;border-radius:999px;padding:7px 16px;font-size:12px;font-weight:750;display:flex;align-items:center;gap:8px;cursor:pointer}
+.step.active{background:#286c68;border-color:#286c68;color:#fff}
+.step:disabled{cursor:default;opacity:.75}
+.step-line{width:52px;height:1px;background:#c8d6d0}
+.dashboard{flex:1;min-height:0;width:100%;display:grid;grid-template-columns:1fr;gap:0}
+.dashboard .panel{min-height:0;height:100%;max-height:100%;padding:22px 30px}
+.dashboard.mode-form .resultpanel{display:none}
+.dashboard.mode-form .formpanel{width:min(940px,100%);margin:0 auto;overflow-y:auto;scrollbar-width:none}
+.dashboard.mode-form .formpanel::-webkit-scrollbar{display:none}
+.dashboard.mode-result .formpanel{display:none}
+.dashboard.mode-result .resultpanel{display:flex;width:min(760px,100%);margin:0 auto;overflow:hidden}
+.dashboard.mode-result .resulthead{margin:0 0 10px}
+.dashboard.mode-result .resulthead h2{font-size:23px}
+.dashboard.mode-result .qrbox{min-height:0;height:min(40vh,390px);flex:none;padding:12px}
+.dashboard.mode-result .qrimg{width:min(100%,min(36vh,340px));height:auto;max-height:100%}
+.dashboard.mode-result .details{margin-top:10px;padding-top:10px;gap:8px}
+.dashboard.mode-result .output-tools{margin-top:9px}
+footer.wrap{flex:none;padding:7px 0 10px}
+@media(max-width:900px){main.wrap{width:min(760px,calc(100% - 32px))}.dashboard{grid-template-columns:1fr}.dashboard.mode-form .formpanel{width:100%}.dashboard.mode-result .resultpanel{width:100%}.dashboard .panel{padding:20px 24px}}
+@media(max-width:520px){header{margin-top:9px;min-height:54px}.brand{font-size:20px}.brandmark{width:34px;height:34px}.brandmark svg{width:22px;height:22px}.wrap{width:calc(100% - 20px)}main.wrap{width:calc(100% - 20px);padding:5px 0 3px;gap:5px}.stepbar{height:32px;gap:8px}.step{padding:5px 13px;font-size:11px}.step-line{width:30px}.dashboard .panel{padding:14px 14px;border-radius:14px}.kicker{font-size:9px;margin-bottom:7px}h1{font-size:29px;letter-spacing:-1.2px;margin-bottom:7px}.intro{font-size:12px;line-height:1.4;margin-bottom:11px}.content-label{font-size:12px;margin:11px 0 7px}.types{gap:6px}.type{padding:7px 10px;font-size:11px;border-radius:8px}.fields{gap:7px}.field{min-height:39px;padding:8px 11px;font-size:12px}.fieldrow{grid-template-columns:1fr 1fr;gap:7px}.subfield-label{font-size:10px;margin-bottom:4px}textarea.field{min-height:60px}.customize{margin-top:10px;padding-top:9px}.custom-title{font-size:11px;margin-bottom:6px}.colorrow{gap:12px}.colorcontrol{font-size:10px}.colorcontrol input[type=color]{width:32px;height:28px}.generate{margin-top:11px;min-height:44px;font-size:13px;border-radius:10px}.hint{font-size:9px;line-height:1.3;margin-top:7px}.error{font-size:10px;margin-top:6px;padding:7px 9px}.dashboard.mode-result .panel{padding:15px}.dashboard.mode-result .resulthead h2{font-size:22px}.dashboard.mode-result .qrbox{height:min(39vh,300px);min-height:0}.dashboard.mode-result .qrimg{width:min(100%,min(34vh,260px))}.dashboard.mode-result .details{font-size:10px;gap:6px}.dashboard.mode-result .detail strong{font-size:11px;margin-bottom:3px}.download{min-height:40px;font-size:11px}.output-tools{gap:7px}footer.wrap{font-size:9px;padding:4px 0 7px}.foot{gap:3px}}
+@media(max-height:700px){.dashboard .panel{padding-top:12px;padding-bottom:12px}.kicker{margin-bottom:5px}.intro{font-size:11px;line-height:1.3;margin-bottom:7px}.content-label{margin-top:8px}.customize{margin-top:8px;padding-top:7px}.generate{margin-top:8px;min-height:40px}.hint{margin-top:5px}.dashboard.mode-result .qrbox{height:min(34vh,220px)}}
 </style>
 </head>
 <body>
@@ -41,7 +69,12 @@ main{padding:28px 0 34px}.dashboard{display:grid;grid-template-columns:1.04fr .9
   <div class="topright"><span class="free">Pembuat QR sederhana</span><span class="lang" aria-label="Bahasa Indonesia">ID · Bahasa Indonesia</span></div>
 </header>
 <main class="wrap" id="top">
-  <div class="dashboard">
+  <nav class="stepbar" aria-label="Langkah pembuatan QR">
+    <button class="step active" id="step1" type="button" aria-current="step">1 <span>Isi QR</span></button>
+    <span class="step-line" aria-hidden="true"></span>
+    <button class="step" id="step2" type="button" disabled>2 <span>Hasil QR</span></button>
+  </nav>
+  <div class="dashboard mode-form" id="dashboard">
     <section class="panel formpanel" aria-labelledby="formtitle">
       <p class="kicker">RuangQR · Gratis tanpa akun</p>
       <h1 id="formtitle">Pembuat QR Code Gratis</h1>
@@ -78,6 +111,10 @@ main{padding:28px 0 34px}.dashboard{display:grid;grid-template-columns:1.04fr .9
 <footer class="wrap"><div class="foot"><span>© <span id="year"></span> <strong>RuangQR</strong> · Pembuat QR untuk sehari-hari</span><span>Ringkas, mudah, dalam Bahasa Indonesia.</span></div></footer>
 <script>
 const fields=document.getElementById('fields');let activeType='url',lastPayload='',lastPngUrl='';
+const dashboard=document.getElementById('dashboard'),step1=document.getElementById('step1'),step2=document.getElementById('step2');
+function showStep(which){const result=which==='result';dashboard.classList.toggle('mode-form',!result);dashboard.classList.toggle('mode-result',result);step1.classList.toggle('active',!result);step2.classList.toggle('active',result);step1.toggleAttribute('aria-current',!result);if(!result)step1.setAttribute('aria-current','step');else step1.removeAttribute('aria-current');if(result)step2.setAttribute('aria-current','step');else step2.removeAttribute('aria-current');window.scrollTo(0,0)}
+step1.addEventListener('click',()=>showStep('form'));
+step2.addEventListener('click',()=>{if(lastPayload)showStep('result')});
 const definitions={
  url:'<label class="fieldgroup"><span class="subfield-label">Alamat tautan</span><input class="field" id="urlvalue" type="url" placeholder="https://contoh.com" autocomplete="url"></label>',
  text:'<label class="fieldgroup"><span class="subfield-label">Teks yang ingin dibagikan</span><textarea class="field" id="textvalue" placeholder="Tulis pesan singkat…" maxlength="1800"></textarea></label>',
@@ -107,7 +144,7 @@ document.getElementById('generate').addEventListener('click',async()=>{
  btn.disabled=true;btn.textContent='Sedang membuat QR…';
  try{const blob=await getImage(endpoint(payload,'png'));if(lastPngUrl)URL.revokeObjectURL(lastPngUrl);lastPngUrl=URL.createObjectURL(blob);lastPayload=payload;
  const img=document.createElement('img');img.className='qrimg';img.alt='QR code yang berisi '+payload.slice(0,80);img.src=lastPngUrl;const box=document.getElementById('qrbox');box.replaceChildren(img);document.getElementById('pnglink').href=lastPngUrl;document.getElementById('outputtools').classList.add('visible');
- document.getElementById('created').textContent=new Intl.DateTimeFormat('id-ID',{dateStyle:'medium',timeStyle:'short'}).format(new Date());document.getElementById('colorinfo').textContent=document.getElementById('qrcolor').value.toUpperCase()+' · '+document.getElementById('bgcolor').value.toUpperCase();
+ document.getElementById('created').textContent=new Intl.DateTimeFormat('id-ID',{dateStyle:'medium',timeStyle:'short'}).format(new Date());document.getElementById('colorinfo').textContent=document.getElementById('qrcolor').value.toUpperCase()+' · '+document.getElementById('bgcolor').value.toUpperCase();showStep('result');
  }catch(e){showError(e instanceof TypeError?'Tidak dapat terhubung ke layanan QR. Periksa koneksi internet lalu coba lagi.':e.message)}finally{btn.disabled=false;btn.textContent='Buat QR Code'}
 });
 document.getElementById('svgbutton').addEventListener('click',async()=>{if(!lastPayload)return;const b=document.getElementById('svgbutton');b.disabled=true;b.textContent='Menyiapkan SVG…';try{const blob=await getImage(endpoint(lastPayload,'svg'));const u=URL.createObjectURL(blob),a=document.createElement('a');a.href=u;a.download='ruangqr.svg';a.click();setTimeout(()=>URL.revokeObjectURL(u),1000)}catch(e){showError('SVG tidak dapat diunduh: '+e.message)}finally{b.disabled=false;b.textContent='↓  Unduh SVG'}});
