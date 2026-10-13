@@ -1,8 +1,10 @@
-const CACHE_NAME = 'ruangqr-shell-v1';
+const CACHE_NAME = 'ruangqr-shell-v2';
 const APP_FILES = [
   './',
   './index.html',
   './qrcode.min.js',
+  './supabase.js',
+  './account.js',
   './manifest.webmanifest',
   './icons/ruangqr-192.png',
   './icons/ruangqr-512.png'
