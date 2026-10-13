@@ -79,6 +79,31 @@ footer.wrap{flex:none;padding:7px 0 10px}
 .header-icon,.install-button{min-height:36px;border:1px solid #d9e4dc;border-radius:10px;background:#fffefa;color:#376d66;display:inline-flex;align-items:center;justify-content:center;gap:6px;cursor:pointer;font:inherit;font-size:12px;font-weight:750;transition:.16s}.header-icon{width:38px;padding:7px}.header-icon svg{width:19px;height:19px}.install-button{padding:7px 12px;background:#79b5b0;color:#fff;border-color:#79b5b0}.install-button svg{width:17px;height:17px}.header-icon:hover,.install-button:hover{filter:brightness(.96);transform:translateY(-1px)}.install-guide{width:min(420px,calc(100% - 32px));border:1px solid #e7e3d8;border-radius:18px;padding:24px;background:#fffaf2;color:#183c3d;box-shadow:0 18px 50px #183c3d30}.install-guide::backdrop{background:#172c2b66;backdrop-filter:blur(3px)}.install-guide h2{font-size:22px;margin:0 0 10px}.install-guide p{font-size:14px;line-height:1.55;color:#52666c;margin:0 0 18px}.install-guide button{border:0;background:#286c68;color:white;font:inherit;font-weight:700;border-radius:10px;padding:10px 16px;cursor:pointer}
 @media(max-width:520px){.topright{gap:6px}.free,.lang{display:none}.header-icon{width:32px;min-height:32px;padding:6px}.install-button{min-height:32px;padding:6px 9px;font-size:11px}}
 
+
+/* Three-screen app navigation and app profile/privacy content. */
+html,body{height:100%;height:100dvh;overflow:hidden}
+body{padding-bottom:0}
+main.wrap{padding:8px 0 6px;gap:8px}
+.stepbar{display:none}
+.profile-screen{width:min(940px,100%);max-height:calc(100dvh - 170px);overflow-y:auto;scrollbar-width:thin;scrollbar-color:#b6cdc5 transparent;margin:auto;gap:14px;align-items:stretch}
+.profile-screen:not([hidden]){display:grid;grid-template-columns:minmax(230px,.78fr) minmax(0,1.5fr)}
+.profile-hero,.policy-card{border:1px solid rgba(61,82,78,.07);border-radius:20px;box-shadow:var(--shadow);padding:26px;background:#fffefa}
+.profile-hero{background:var(--blue);display:flex;flex-direction:column;justify-content:center;align-items:flex-start}
+.profile-avatar{width:66px;height:66px;border-radius:22px;background:#91c4ba;color:white;display:grid;place-items:center;margin-bottom:20px}
+.profile-avatar svg{width:38px;height:38px}
+.profile-hero .kicker{margin-bottom:7px}.profile-hero h1{font-size:36px;margin:0 0 10px}.profile-hero .intro{font-size:14px;margin:0;line-height:1.65}
+.profile-badges{display:flex;flex-wrap:wrap;gap:7px;margin-top:18px}.profile-badges span{border-radius:99px;padding:7px 10px;background:#f9fcf8;border:1px solid #dce8df;color:#47736a;font-size:11px;font-weight:750}
+.policy-card{overflow-y:auto}.policy-card .kicker{margin-bottom:7px}.policy-card h2{font-size:22px;line-height:1.2;letter-spacing:-.5px;margin:0 0 17px}.policy-copy h3{font-size:13px;margin:14px 0 5px;color:#286c68}.policy-copy p,.terms p,.policy-note{font-size:12px;line-height:1.6;color:#586966;margin:0}.policy-date{margin-top:13px!important;color:#74817d!important;font-size:11px!important}
+.terms{border-top:1px solid #e7e3d8;margin-top:15px;padding-top:13px}.terms summary{font-size:13px;font-weight:750;color:#286c68;cursor:pointer}.terms p{margin-top:9px}
+.policy-note{border-radius:10px;background:#f6f4ed;padding:10px 12px;margin-top:13px;font-size:10px}
+.bottom-nav{z-index:20;flex:none;width:min(460px,calc(100% - 24px));min-height:60px;align-self:center;margin:0 auto 10px;padding:5px 8px;display:grid;grid-template-columns:repeat(3,1fr);gap:5px;border:1px solid #e6e1d7;border-radius:18px;background:rgba(255,254,250,.97);box-shadow:0 8px 28px rgba(59,77,69,.14);backdrop-filter:blur(12px)}
+.nav-tab{border:0;border-radius:13px;background:transparent;color:#77847f;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;font:inherit;font-size:10px;font-weight:700;cursor:pointer;transition:.16s}.nav-tab svg{width:20px;height:20px;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}.nav-tab[aria-current="page"]{background:#e7f1eb;color:#286c68}.nav-tab:disabled{opacity:.44;cursor:not-allowed}
+main.mode-profile .dashboard{display:none}main.mode-profile .profile-screen{flex:0 1 auto}
+main.mode-create .profile-screen,main.mode-result .profile-screen{display:none}
+main.mode-create .dashboard{display:grid}main.mode-create .dashboard.mode-form{display:grid}main.mode-create .dashboard.mode-form .resultpanel{display:none}main.mode-create .dashboard.mode-form .formpanel{display:block}
+main.mode-result .dashboard.mode-result{display:grid}
+@media(max-width:700px){.profile-screen:not([hidden]){grid-template-columns:1fr;gap:9px;max-height:calc(100dvh - 142px)}.profile-hero,.policy-card{padding:18px;border-radius:16px}.profile-hero{display:grid;grid-template-columns:52px 1fr;column-gap:12px;align-content:start}.profile-avatar{width:48px;height:48px;border-radius:15px;grid-row:span 2;margin:0}.profile-avatar svg{width:29px;height:29px}.profile-hero .kicker{align-self:end;font-size:9px;margin:0}.profile-hero h1{font-size:26px;align-self:start;margin:2px 0 0}.profile-hero .intro{grid-column:1/-1;font-size:12px;line-height:1.5;margin-top:10px}.profile-badges{grid-column:1/-1;margin-top:10px}.policy-card h2{font-size:18px;margin-bottom:10px}.policy-copy h3{font-size:12px;margin:10px 0 3px}.policy-copy p,.terms p{font-size:11px;line-height:1.45}.policy-date{font-size:10px!important}.terms{margin-top:10px;padding-top:9px}.terms summary{font-size:12px}.policy-note{margin-top:9px;padding:8px;font-size:9px}.bottom-nav{min-height:58px;margin-bottom:max(7px,env(safe-area-inset-bottom));border-radius:16px}main.wrap{width:calc(100% - 20px);padding:4px 0;gap:4px}}
+
 </style>
 </head>
 <body>
@@ -87,11 +112,24 @@ footer.wrap{flex:none;padding:7px 0 10px}
   <div class="topright"><span class="free">Pembuat QR sederhana</span><button class="header-icon" id="refreshButton" type="button" title="Segarkan halaman" aria-label="Segarkan halaman"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 11a8 8 0 0 0-14.7-3L4 10m0-5v5h5M4 13a8 8 0 0 0 14.7 3L20 14m0 5v-5h-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button><button class="install-button" id="installButton" type="button" aria-label="Instal RuangQR"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3v11m0 0 4-4m-4 4-4-4M5 16v4h14v-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Instal</span></button><span class="lang" aria-label="Bahasa Indonesia">ID · Bahasa Indonesia</span></div>
 </header>
 <main class="wrap" id="top">
-  <nav class="stepbar" aria-label="Langkah pembuatan QR">
-    <button class="step active" id="step1" type="button" aria-current="step">1 <span>Isi QR</span></button>
-    <span class="step-line" aria-hidden="true"></span>
-    <button class="step" id="step2" type="button" disabled>2 <span>Hasil QR</span></button>
-  </nav>
+  <section class="profile-screen" id="profileScreen" aria-labelledby="profileTitle" hidden>
+    <div class="profile-hero">
+      <div class="profile-avatar" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M3.5 3.5h6.5V10H3.5zM14 3.5h6.5V10H14zM3.5 14h6.5v6.5h-6.5z" stroke="currentColor" stroke-width="1.8"/><path d="M14 14h3v3h-3zM19 14v2m-5 4h2m3-2v2h2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <p class="kicker">Profil aplikasi</p><h1 id="profileTitle">RuangQR</h1>
+      <p class="intro">Pembuat QR sederhana untuk tautan, Wi-Fi, teks, email, telepon, dan lokasi. Gratis, tanpa akun, dan proses pembuatan QR berjalan di perangkat Anda.</p>
+      <div class="profile-badges"><span>Gratis</span><span>Tanpa akun</span><span>Privasi lokal</span></div>
+    </div>
+    <div class="policy-card" id="privacy-policy"><p class="kicker">Informasi untuk Google Play</p><h2>Kebijakan Privasi & Penggunaan Data</h2>
+      <div class="policy-copy"><h3>Data yang diproses</h3><p>Konten yang Anda masukkan (termasuk alamat tautan, teks, nomor telepon, email, lokasi, atau kredensial Wi-Fi) diproses di browser pada perangkat Anda untuk membentuk QR. RuangQR tidak mengunggah konten tersebut ke server aplikasi dan tidak mengumpulkan akun atau profil pengguna.</p>
+      <h3>Penyimpanan dan berbagi</h3><p>Konten input tidak disimpan oleh RuangQR setelah halaman ditutup atau dimuat ulang. QR yang Anda unduh atau bagikan dapat memuat data yang Anda masukkan; siapa pun yang memperoleh gambar tersebut dapat membacanya. Berhati-hatilah saat membuat atau membagikan QR Wi-Fi maupun data pribadi.</p>
+      <h3>Jaringan, iklan, dan izin</h3><p>Aplikasi memerlukan internet untuk pemuatan pertama dan pembaruan. Service worker menyimpan berkas aplikasi agar dapat dibuka offline. RuangQR tidak memakai iklan, analitik, pelacak, atau SDK pihak ketiga untuk mengirim data QR. Aplikasi tidak meminta izin perangkat khusus.</p>
+      <h3>Keamanan dan pilihan Anda</h3><p>Anda mengendalikan konten yang dimasukkan dan file yang diunduh. Hindari membuat QR berisi informasi yang tidak ingin terlihat oleh orang lain. Menghapus data situs/browser akan menghapus cache aplikasi di perangkat.</p>
+      <h3>Perubahan kebijakan</h3><p>Kebijakan ini dapat diperbarui jika cara kerja aplikasi berubah. Periksa halaman ini untuk versi terbaru.</p>
+      <p class="policy-date">Terakhir diperbarui: 14 Oktober 2026</p></div>
+      <details class="terms"><summary>Ketentuan penggunaan</summary><p>RuangQR disediakan gratis sebagaimana adanya untuk membuat QR. Periksa isi dan uji QR sebelum digunakan untuk keperluan penting. Pengguna bertanggung jawab atas konten yang dikodekan dan cara membagikannya. Jangan gunakan aplikasi untuk membuat atau menyebarkan konten ilegal, menyesatkan, atau merugikan.</p></details>
+      <p class="policy-note">Keterangan ini menjelaskan perilaku aplikasi saat ini dan bukan sertifikasi atau jaminan persetujuan Google Play.</p>
+    </div>
+  </section>
   <div class="dashboard mode-form" id="dashboard">
     <section class="panel formpanel" aria-labelledby="formtitle">
       <p class="kicker">RuangQR · Gratis tanpa akun</p>
@@ -126,15 +164,18 @@ footer.wrap{flex:none;padding:7px 0 10px}
     </section>
   </div>
 </main>
-<footer class="wrap"><div class="foot"><span>© <span id="year"></span> <strong>RuangQR</strong> · Pembuat QR untuk sehari-hari</span><span>Ringkas, mudah, dalam Bahasa Indonesia.</span></div></footer>
+<nav class="bottom-nav" aria-label="Navigasi utama">
+  <button class="nav-tab" id="navProfile" type="button" aria-current="page"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c.8-3.2 3.1-5 7-5s6.2 1.8 7 5"/></svg><span>Profil</span></button>
+  <button class="nav-tab" id="navCreate" type="button"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4z"/><path d="M14 14h3v3h-3zM19 14v2m-5 4h2m3-2v2h2"/></svg><span>Buat QR</span></button>
+  <button class="nav-tab" id="navResult" type="button" disabled><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 8h3v3H8zM14 8h2v2h-2zM8 14h3v3H8zM14 14h2v2h-2zM18 14v3"/></svg><span>Hasil QR</span></button>
+</nav>
 <dialog class="install-guide" id="installGuide" aria-labelledby="installTitle"><h2 id="installTitle">Pasang RuangQR</h2><p id="installInstructions">Ikuti petunjuk pemasangan dari browser Anda.</p><button id="closeInstallGuide" type="button">Mengerti</button></dialog>
 <script src="./qrcode.min.js"></script>
 <script>
 const fields=document.getElementById('fields');let activeType='url',lastPayload='',lastPngUrl='',lastSvgData='';
-const dashboard=document.getElementById('dashboard'),step1=document.getElementById('step1'),step2=document.getElementById('step2');
-function showStep(which){const result=which==='result';dashboard.classList.toggle('mode-form',!result);dashboard.classList.toggle('mode-result',result);step1.classList.toggle('active',!result);step2.classList.toggle('active',result);step1.toggleAttribute('aria-current',!result);if(!result)step1.setAttribute('aria-current','step');else step1.removeAttribute('aria-current');if(result)step2.setAttribute('aria-current','step');else step2.removeAttribute('aria-current');window.scrollTo(0,0)}
-step1.addEventListener('click',()=>showStep('form'));
-step2.addEventListener('click',()=>{if(lastPayload)showStep('result')});
+const dashboard=document.getElementById('dashboard'),main=document.querySelector('main'),profileScreen=document.getElementById('profileScreen'),navProfile=document.getElementById('navProfile'),navCreate=document.getElementById('navCreate'),navResult=document.getElementById('navResult');
+function showView(which){if(which==='result'&&!lastPayload)return;main.classList.remove('mode-profile','mode-create','mode-result');main.classList.add('mode-'+which);dashboard.classList.toggle('mode-form',which==='create');dashboard.classList.toggle('mode-result',which==='result');profileScreen.hidden=which!=='profile';[[navProfile,'profile'],[navCreate,'create'],[navResult,'result']].forEach(([tab,key])=>{if(which===key)tab.setAttribute('aria-current','page');else tab.removeAttribute('aria-current')});navResult.disabled=!lastPayload;window.scrollTo(0,0)}
+navProfile.addEventListener('click',()=>showView('profile'));navCreate.addEventListener('click',()=>showView('create'));navResult.addEventListener('click',()=>showView('result'));
 const definitions={
  url:'<label class="fieldgroup"><span class="subfield-label">Alamat tautan</span><input class="field" id="urlvalue" type="url" placeholder="https://contoh.com" autocomplete="url"></label>',
  text:'<label class="fieldgroup"><span class="subfield-label">Teks yang ingin dibagikan</span><textarea class="field" id="textvalue" placeholder="Tulis pesan singkat…" maxlength="1800"></textarea></label>',
@@ -169,7 +210,7 @@ document.getElementById('generate').addEventListener('click',async()=>{
   const blob=await makePngBlob(canvas,qr._oQRCode.getModuleCount(),light);if(!blob)throw new Error('Gagal menyiapkan gambar PNG.');
   if(lastPngUrl)URL.revokeObjectURL(lastPngUrl);lastPngUrl=URL.createObjectURL(blob);lastPayload=payload;lastSvgData=makeSvg(qr,dark,light);
   const img=document.createElement('img');img.className='qrimg';img.alt='QR code yang berisi '+payload.slice(0,80);img.src=lastPngUrl;const box=document.getElementById('qrbox');box.replaceChildren(img);document.getElementById('pnglink').href=lastPngUrl;document.getElementById('outputtools').classList.add('visible');
-  document.getElementById('created').textContent=new Intl.DateTimeFormat('id-ID',{dateStyle:'medium',timeStyle:'short'}).format(new Date());document.getElementById('colorinfo').textContent=dark.toUpperCase()+' · '+light.toUpperCase();showStep('result');
+  document.getElementById('created').textContent=new Intl.DateTimeFormat('id-ID',{dateStyle:'medium',timeStyle:'short'}).format(new Date());document.getElementById('colorinfo').textContent=dark.toUpperCase()+' · '+light.toUpperCase();showView('result');
  }catch(e){showError('QR gagal dibuat. Periksa isi kolom atau gunakan teks yang lebih singkat.');console.error(e)}finally{btn.disabled=false;btn.textContent='Buat QR Code'}
 });
 document.getElementById('svgbutton').addEventListener('click',()=>{if(!lastSvgData)return;const blob=new Blob([lastSvgData],{type:'image/svg+xml;charset=utf-8'}),u=URL.createObjectURL(blob),a=document.createElement('a');a.href=u;a.download='ruangqr.svg';a.click();setTimeout(()=>URL.revokeObjectURL(u),1000)});
@@ -180,7 +221,7 @@ document.getElementById('closeInstallGuide').addEventListener('click',()=>instal
 window.addEventListener('appinstalled',()=>{installButton.hidden=true;});
 document.getElementById('refreshButton').addEventListener('click',()=>window.location.reload());
 if('serviceWorker' in navigator&&(location.protocol==='https:'||location.hostname==='localhost'||location.hostname==='127.0.0.1'))navigator.serviceWorker.register('./sw.js',{scope:'./'}).catch(error=>console.warn('Pendaftaran mode offline gagal:',error));
-renderFields();document.getElementById('year').textContent=new Date().getFullYear();
+renderFields();showView('profile');
 </script>
 </body>
 </html>
